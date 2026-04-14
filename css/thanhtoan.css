@@ -1,0 +1,55 @@
+body {
+  background: #f5f7fb;
+}
+
+.card-custom {
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.qr-box {
+  background: linear-gradient(135deg, #2b7cff, #1A4D64);
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  height: 100%;
+  border-radius: 16px 0 0 16px;
+}
+
+.qr-box img {
+  width: 280px;
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.bank-card {
+  border-radius: 0 16px 16px 0;
+}
+
+.info-item {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.btn-confirm {
+  border-radius: 30px;
+  height: 50px;
+}
+
+/* NÚT COPY */
+.btn-copy {
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1.5px solid #0d6efd;
+  color: #0d6efd;
+  background: transparent;
+}
+
+.btn-copy:hover {
+  background: #0d6efd;
+  color: #fff;
+}

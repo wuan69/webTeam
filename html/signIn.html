@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <script src="../js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar shadow navbar-light navbar-expand-lg border-bottom border-1 py-2">
+      <div class="container"> 
+        <a class="navbar-brand me-4 d-flex flex-row align-items-center" href="home.html">
+          <img src="../img/icon-link.png" alt="icon" width="60" class="me-2">
+          <p class="fs-4 fw-bold text-warning mb-0">Nắng Central Tour</p>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav me-auto fw-medium"> 
+            <li class="nav-item dropdown px-2">
+              <a class="nav-link dropdown-toggle fs-5" href="#" data-bs-toggle="dropdown">Tour du lịch</a>
+              <ul class="dropdown-menu shadow border-0 rounded-3 mt-2">
+                <li><a class="dropdown-item fs-5 py-2" href="./home.html#qn">Quảng Ngãi</a></li>
+                <li><a class="dropdown-item fs-5 py-2" href="./home.html#bd">Bình Định</a></li>
+                <li><a class="dropdown-item fs-5 py-2" href="./home.html#hue">Thừa thiên huế</a></li>
+                <li><a class="dropdown-item fs-5 py-2" href="./home.html#ld">Lâm Đồng</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown px-2">
+              <a class="nav-link dropdown-toggle fs-5" href="#" data-bs-toggle="dropdown">Giới thiệu</a>
+              <ul class="dropdown-menu shadow border-0 rounded-3 mt-2">
+                <li><a class="dropdown-item fs-5 py-2" href="./huongdandattour.html">Hướng dẫn đặt tour</a></li>
+                <li><a class="dropdown-item fs-5 py-2" href="./huongdanthanhtoan.html">Hướng dẫn thanh toán</a></li>
+                <li><a class="dropdown-item fs-5 py-2" href="./cauhoithuonggap.html">Câu hỏi thường gặp</a></li>
+              </ul>
+            </li>
+            <li class="nav-item px-2">
+              <a class="nav-link fs-5" href="./vechungtoi.html">Về chúng tôi</a>
+            </li>
+          </ul>
+          <div class="mt-3 mt-lg-0 d-flex gap-3">
+            <button type="button" class="btn btn-outline-primary rounded-pill fs-5 px-4 d-flex align-items-center shadow-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              Tư vấn tour
+            </button>
+            <a href="./signIn.html" class="btn btn-primary rounded-pill fs-5 px-4 d-flex align-items-center shadow-sm">Sign In</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content rounded-4 border-0 shadow-lg">
+        <div class="modal-header border-bottom-0 pb-0">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-header d-flex flex-column align-items-center pt-0 border-bottom-0">
+          <h1 class="modal-title fs-3 fw-bold text-primary" id="staticBackdropLabel">Nhận Tư Vấn, Báo Giá Tour</h1>
+          <p class="fs-5 text-secondary text-center mt-2">Quý khách vui lòng điền đầy đủ thông tin dưới đây, chúng tôi sẽ liên hệ lại trong thời gian sớm nhất.</p>
+        </div>
+        <div class="modal-body px-5">
+          <form action="send" class="d-flex flex-column">
+            <div class="mb-4">
+              <label for="diaDiem" class="form-label fs-5 fw-medium">Bạn muốn đi đâu ?</label> 
+              <select name="diaDiem" id="diaDiem" class="form-select form-select-lg border-0 border-bottom rounded-0 bg-light px-3 fs-5 shadow-none">
+                <option value="Quảng Ngãi">Quảng Ngãi</option>
+                <option value="Bình Định">Bình Định</option>
+                <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
+                <option value="Lâm Đồng">Lâm Đồng</option>
+                <option value="None">Chưa biết cần tư vấn</option>
+              </select>
+            </div>
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <label for="name" class="form-label fs-5 fw-medium">Họ và tên:</label>
+                <input onblur="ktrTen();" type="text" id="name" name="name" placeholder="Nguyen Van A" class="form-control form-control-lg bg-light border-0 rounded-3 fs-5">
+                <span id="er1"></span>
+              </div>
+              <div class="col-md-6 mt-3 mt-md-0">
+                <label for="phone" class="form-label fs-5 fw-medium">Số điện thoại:</label>
+                <input onblur="chkPhone();" type="tel" id="phone" name="phone" placeholder="071-2345678" class="form-control form-control-lg bg-light border-0 rounded-3 fs-5">
+                <span id="er2"></span>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <label for="SoLuongKhach" class="form-label fs-5 fw-medium">Số khách:</label>
+                <input type="number" min="1" step="1" id="SoLuongKhach" name="SoLuongKhach" class="form-control form-control-lg bg-light border-0 rounded-3 fs-5">
+              </div>
+              <div class="col-md-6 mt-3 mt-md-0">
+                <label for="date" class="form-label fs-5 fw-medium">Ngày dự kiến:</label>
+                <input type="date" id="date" name="date" class="form-control form-control-lg bg-light border-0 rounded-3 fs-5 text-secondary">
+              </div>
+            </div>
+            <div class="col-md-12 mb-2">
+              <label for="note" class="form-label fs-5 fw-medium">Ghi chú</label>
+              <textarea class="form-control bg-light border-0 rounded-3 fs-5 p-3" name="note" id="note" placeholder="VD: cần xe 24 chỗ, khách có người lớn tuổi, không ngồi đầu được" rows="5"></textarea>
+            </div>
+          </form>   
+        </div>
+        <div class="modal-footer border-top-0 justify-content-center pb-4">
+          <button type="button" class="btn btn-primary btn-lg rounded-pill fs-5 px-5 shadow" data-bs-dismiss="modal" onclick="yeuCau();">Gửi yêu cầu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- header -->
+  <main class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+        
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+          <div class="card-body p-4 p-md-5">
+            
+            <div class="text-center mb-4">
+              <h2 class="fw-bold text-warning mb-1">Nắng Central</h2>
+              <p class="text-secondary small">Chào mừng bạn quay lại!</p>
+            </div>
+            
+            <ul class="nav nav-pills nav-justified mb-4 bg-light p-1 rounded-pill border" id="authTab" role="tablist" >
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active rounded-pill fw-bold" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-selected="true">
+                  Đăng nhập
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill fw-bold" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab" aria-selected="false">
+                  Đăng ký
+                </button>
+              </li>
+            </ul>
+            
+            <div class="tab-content" id="authTabContent">
+              
+              <div class="tab-pane fade show active" style="min-height: 350px;" id="login" role="tabpanel" aria-labelledby="login-tab">
+                <form onsubmit="login(event);">
+                  <div class="form-floating mb-3">
+                    <input type="text" id="loginName" class="form-control rounded-3" placeholder="Email / Tên đăng nhập">
+                    <label for="loginName" class="text-secondary">Email / Tên đăng nhập</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="password" id="loginPass" class="form-control rounded-3" placeholder="Mật khẩu">
+                    <label for="loginPass" class="text-secondary">Mật khẩu</label>
+                  </div>
+
+                  <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="rememberMe">
+                      <label class="form-check-label text-secondary small" for="rememberMe">Ghi nhớ tôi</label>
+                    </div>
+                    <a href="#" class="text-decoration-none text-primary small fw-medium">Quên mật khẩu?</a>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold shadow-sm">Đăng nhập</button>
+                </form>
+              </div>
+
+              <div class="tab-pane fade" style="min-height: 350px;" id="register" role="tabpanel" aria-labelledby="register-tab">
+                <form>
+                  <div class="form-floating mb-3">
+                    <input type="text" id="regName" class="form-control rounded-3" placeholder="Họ và tên">
+                    <label for="regName" class="text-secondary">Họ và tên</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="tel" id="regPhone" class="form-control rounded-3" placeholder="Số điện thoại">
+                    <label for="regPhone" class="text-secondary">Số điện thoại</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="password" id="regPass" class="form-control rounded-3" placeholder="Mật khẩu">
+                    <label for="regPass" class="text-secondary">Mật khẩu</label>
+                  </div>
+                  <div class="form-floating mb-4">
+                    <input type="password" id="regConfirmPass" class="form-control rounded-3" placeholder="Xác nhận mật khẩu">
+                    <label for="regConfirmPass" class="text-secondary">Xác nhận mật khẩu</label>
+                  </div>
+
+                  <button type="submit" class="btn btn-warning btn-lg w-100 rounded-pill fw-bold shadow-sm text-dark">Tạo tài khoản</button>
+                </form>
+              </div>
+            </div>
+            <div class="mt-4 pt-3 border-top text-center">
+              <p class="text-secondary small mb-3">Hoặc tiếp tục với</p>
+              <div class="d-flex justify-content-center gap-2">
+                <button type="button" class="btn btn-light border rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 45px; height: 45px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="text-danger" viewBox="0 0 16 16"><path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/></svg>
+                </button>
+                <button type="button" class="btn btn-light border rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 45px; height: 45px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="text-primary" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+  <!-- foooter -->
+ <footer class="border-top mt-2 py-3 bg-dark fs-5"> 
+    <div class="container">
+      <div class="row align-items-start"> 
+        
+        <div class="col-md-7 col-lg-6 d-flex flex-column align-items-start mb-3 mb-md-0">
+          <div class="d-flex align-items-center mb-2">
+            <img src="../img/icon-link.png" alt="icon" width="45" class="me-2">
+            <h4 class="fs-4 text-white fw-bold mb-0">Nắng Central Tour</h4>
+          </div>
+          
+          <p class="text-secondary mb-1 fs-5">Giấy phép kinh doanh: 00414058893 do Sở KH&ĐT TP.HCM cấp.</p>
+          <p class="text-secondary mb-3 fs-5">Giấy phép KD lữ hành: 78-1854/2020/TCDL-GP LHQT</p>
+          
+          <a href="https://zalo.me/g/jyvuxd013" class="btn btn-sm btn-link text-white text-decoration-none p-0 mb-1 text-start fs-5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="me-1" viewBox="0 0 640 640"><path fill="currentColor" d="M224.2 89C216.3 70.1 195.7 60.1 176.1 65.4L170.6 66.9C106 84.5 50.8 147.1 66.9 223.3C104 398.3 241.7 536 416.7 573.1C493 589.3 555.5 534 573.1 469.4L574.6 463.9C580 444.2 569.9 423.6 551.1 415.8L453.8 375.3C437.3 368.4 418.2 373.2 406.8 387.1L368.2 434.3C297.9 399.4 241.3 341 208.8 269.3L253 233.3C266.9 222 271.6 202.9 264.8 186.3L224.2 89z"/></svg>
+            (+84) 938 029 628
+          </a>
+          <a href=https://csm.iuh.edu.vn/vi/quy-dinh-huong-dan/huong-dan-dang-ky-va-su-dung-email-iuh-cho-sinh-vien" class="btn btn-sm btn-link text-white text-decoration-none p-0 mb-1 text-start fs-5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="me-1" viewBox="0 0 640 640"><path fill="currentColor" d="M112 128C85.5 128 64 149.5 64 176C64 191.1 71.1 205.3 83.2 214.4L291.2 370.4C308.3 383.2 331.7 383.2 348.8 370.4L556.8 214.4C568.9 205.3 576 191.1 576 176C576 149.5 554.5 128 528 128L112 128zM64 260L64 448C64 483.3 92.7 512 128 512L512 512C547.3 512 576 483.3 576 448L576 260L377.6 408.8C343.5 434.4 296.5 434.4 262.4 408.8L64 260z"/></svg>
+            kinhdoanh.tournangcentral@gmail.com
+          </a>
+          <a href="https://www.google.com/maps/dir//Industrial+University+of+Ho+Chi+Minh+City,+12+Nguy%E1%BB%85n+V%C4%83n+B%E1%BA%A3o,+H%E1%BA%A1nh+Th%C3%B4ng,+H%E1%BB%93+Ch%C3%AD+Minh+700000,+Vietnam/@10.8003328,106.6893312,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3174deb3ef536f31:0x8b7bb8b7c956157b!2m2!1d106.6868454!2d10.8221589?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D" class="btn btn-sm btn-link text-white text-decoration-none p-0 text-start fs-5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" class="me-1" viewBox="0 0 640 640"><path fill="currentColor" d="M576 112C576 100.9 570.3 90.6 560.8 84.8C551.3 79 539.6 78.4 529.7 83.4L413.5 141.5L234.1 81.6C226 78.9 217.3 79.5 209.7 83.3L81.7 147.3C70.8 152.8 64 163.9 64 176L64 528C64 539.1 69.7 549.4 79.2 555.2C88.7 561 100.4 561.6 110.3 556.6L226.4 498.5L399.7 556.3C395.4 549.9 391.2 543.2 387.1 536.4C376.1 518.1 365.2 497.1 357.1 474.6L255.9 440.9L255.9 156.4L383.9 199.1L383.9 298.4C414.9 262.6 460.9 240 511.9 240C534.5 240 556.1 244.4 575.9 252.5L576 112zM512 288C445.7 288 392 340.8 392 405.9C392 474.8 456.1 556.3 490.6 595.2C502.2 608.2 521.9 608.2 533.5 595.2C568 556.3 632.1 474.8 632.1 405.9C632.1 340.8 578.4 288 512.1 288zM472 408C472 385.9 489.9 368 512 368C534.1 368 552 385.9 552 408C552 430.1 534.1 448 512 448C489.9 448 472 430.1 472 408z"/></svg>
+            63 Nguyễn Văn Bảo P.15 Q.Gò Vấp
+          </a>
+        </div>
+
+        <div class="col-md-5 col-lg-6">
+          <div class="row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <h5 class="text-white fs-6 fw-bold mb-2">Chứng nhận & Thanh toán</h5>
+              
+              <p class="text-white-50 mb-1 fs-5" >Được chứng nhận</p>
+              <a href="chuung nhan" class="d-block mb-3">
+                <img src="../img/chungnhan.png" alt="dauchungnhan" width="120">
+              </a>
+              
+              <p class="text-white-50 mb-1 fs-5" >Chấp nhận thanh toán</p>
+              <div class="d-flex align-items-center gap-2">
+                <img src="../img/visa.jpeg" alt="visa" width="35" height="24" class="bg-white p-1 rounded-1 object-fit-contain">
+                <img src="../img/vcb.jpg" alt="vcb" width="35" height="24" class="bg-white p-1 rounded-1 object-fit-contain">
+                <img src="../img/momo.jpg" alt="momo" width="35" height="24" class="rounded-1 object-fit-cover">
+              </div>
+            </div>
+
+            <div class="col-sm-6 d-flex flex-column align-items-sm-end align-items-sm-start mt-3 mt-sm-0">
+              <p class="text-white-50 mb-1 fs-6" >Quét QR tư vấn</p>
+              <img src="../img/Qr.png" alt="qr"  class="rounded-2 w-50 shadow-sm bg-white p-1">
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="row mt-3 pt-2 border-top border-secondary">
+        <div class="col-12 text-center">
+          <address class="text-white-50 mb-0" style="font-size: 0.75rem;">
+            &copy; 2026 Nắng Central Tour. All rights reserved.
+            
+          </address>
+        </div>
+      </div>
+      
+    </div>
+  </footer>
+  <script src="../js/quang.js"> </script>
+</body>
+</html>

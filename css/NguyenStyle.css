@@ -1,0 +1,251 @@
+
+
+.app {
+    background-color: #FDF8F1;
+    color: #2D2D2D;
+    font-size: 1.25rem;
+    line-height: 1.8;
+}
+
+/* container override */
+.app .container,
+.app .container-fluid {
+    max-width: 1450px;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.app .sidebar-sticky {
+    position: sticky;
+    top: 20px;
+    background: #fff;
+    border-radius: 15px;
+    border: 1px solid #EAEAEA;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.07);
+    overflow: hidden;
+}
+
+.app .sidebar-header {
+    background-color: #F8F9FA;
+    padding: 25px;
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.app .header-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #1A4D64;
+}
+
+.app .header-sub {
+    font-size: 1.1rem;
+    color: #777;
+}
+
+/* menu */
+.app .menu-list {
+    list-style: none;
+    padding: 15px;
+    margin: 0;
+}
+
+.app .menu-list li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    font-size: 1.2rem;
+    color: #2D2D2D;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+.app .menu-list li a:hover {
+    background: #f1f1f1;
+}
+
+.app .menu-list li.active a {
+    background-color: #E8B84B;
+    color: #1A4D64;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.app .main-content-card {
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid #EAEAEA;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+/* banner */
+.app .content-banner {
+    background-color: #1A4D64;
+    color: #fff;
+    padding: 30px 20px;
+    font-size: 1.7rem;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* body */
+.app .content-body {
+    padding: 50px;
+}
+
+/* section */
+.app .content-section h5 {
+    font-size: 1.5rem;
+    color: #1A4D64;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.app .content-section p {
+    font-size: 1.2rem;
+    line-height: 1.9;
+    text-align: justify;
+}
+
+/* list */
+.app .tour-links,
+.app .criteria-list {
+    padding-left: 0;
+}
+
+.app .tour-links li,
+.app .criteria-list li {
+    list-style: none;
+    margin-bottom: 12px;
+    font-size: 1.15rem;
+}
+
+.app .tour-links li::before,
+.app .criteria-list li::before {
+    content: "•";
+    color: #E8B84B;
+    margin-right: 8px;
+}
+
+.app .tour-links a {
+    color: #1A4D64;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.app .tour-links a:hover {
+    text-decoration: underline;
+}
+
+/* divider */
+.app .divider-dashed {
+    border-top: 1px dashed #DDD;
+    margin: 25px 0;
+}
+
+/* achievement */
+.app .achievement-box {
+    background-color: #FDF8F1;
+    border-left: 6px solid #E8B84B;
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: 12px;
+}
+
+.app .achievement-box h6 {
+    font-size: 1.4rem;
+    color: #1A4D64;
+    font-weight: 700;
+}
+
+/* =========================
+   HƯỚNG DẪN
+========================= */
+
+.app .step-box {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.app .step-num {
+    background: #E8B84B;
+    color: #1A4D64;
+    font-size: 2rem;
+    font-weight: 800;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.app .step-content h5 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1A4D64;
+}
+
+.app .step-content p {
+    font-size: 1.2rem;
+}
+
+/* =========================
+   PAYMENT
+========================= */
+
+.app .bank-info-card {
+    background: #F8F9FA;
+    border: 2px solid #E8B84B;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.app .bank-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px dashed #ccc;
+}
+
+.app .bank-row .label {
+    font-size: 1.2rem;
+}
+
+.app .bank-row .value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1A4D64;
+}
+
+/* =========================
+   FAQ
+========================= */
+
+.app .faq-item {
+    border: 1px solid #eee;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.app .faq-item .accordion-button {
+    padding: 20px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1A4D64;
+}
+
+.app .faq-item .accordion-body {
+    padding: 20px;
+    font-size: 1.2rem;
+}

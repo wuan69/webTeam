@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <script src="../js/bootstrap.min.js"></script>
+  <!-- <script>
+    window.onload = function() {
+        load();
+    };
+    
+  </script> -->
+  <script>
+    let ktr = localStorage.getItem("isOwner");
+    if (ktr !== "true") {
+        window.location.href = "./canhbao.html";
+    }
+  </script>
+</head>
+<body class="bg-light">
+<!-- nav -->
+    <nav class="navbar shadow navbar-light navbar-expand-lg border-bottom border-1 py-2">
+      <div class="container"> 
+        <a class="navbar-brand me-4 d-flex flex-row align-items-center" href="home.html">
+          <img src="../img/icon-link.png" alt="icon" width="60" class="me-2">
+          <p class="fs-4 fw-bold text-warning mb-0">Nắng Central Tour</p>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav me-auto fw-medium"> 
+            <li class="nav-item dropdown px-2">
+              <a class="nav-link dropdown-toggle fs-5" href="#" data-bs-toggle="dropdown">Tour du lịch</a>
+              <ul class="dropdown-menu shadow border-0 rounded-3 mt-2">
+                <li><a class="dropdown-item fs-5 py-2" href="./home.html#qn">Quảng Ngãi</a></li>
+                <li><a class="dropdown-item fs-5 py-2" href="./home.html#bd">Bình Định</a></li>
+                <li><a class="dropdown-item fs-5 py-2" href="./home.html#hue">Thừa thiên huế</a></li>
+                <li><a class="dropdown-item fs-5 py-2" href="./home.html#ld">Lâm Đồng</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown px-2">
+              <a class="nav-link dropdown-toggle fs-5" href="#" data-bs-toggle="dropdown">Giới thiệu</a>
+              <ul class="dropdown-menu shadow border-0 rounded-3 mt-2">
+                <li><a class="dropdown-item fs-5 py-2" href="./huongdandattour.html">Hướng dẫn đặt tour</a></li>
+                <li><a class="dropdown-item fs-5 py-2" href="./huongdanthanhtoan.html">Hướng dẫn thanh toán</a></li>
+                <li><a class="dropdown-item fs-5 py-2" href="./cauhoithuonggap.html">Câu hỏi thường gặp</a></li>
+              </ul>
+            </li>
+            <li class="nav-item px-2">
+              <a class="nav-link fs-5" href="./vechungtoi.html">Về chúng tôi</a>
+            </li>
+          </ul>
+          <div class="mt-3 mt-lg-0 d-flex gap-3">
+            <button class="btn btn-danger rounded-pill fs-5 px-4 d-flex align-items-center shadow-sm" onclick="logout();">Sign Out</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  <div class="container-fluid py-4">
+    <!-- random id trước lưu ở bản này xong sau đó mới 
+    gửi ra cho người dùng nếu nhập đúng mã sẽ vô lại đây xem được -->
+    <div class="row mb-5">
+      <div class="col-12">
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-white border-0 pt-4">
+            <h1 class="h3 text-primary">📋 Danh sách đơn đặt tour</h1>
+          </div>
+          <div class="card-body">
+            <table class="table table-responsive table-hover table-striped align-middle">
+              <thead class="table-dark">
+                <tr>
+                  <th>ID</th>
+                  <th>Số điện thoại</th>
+                  <th>Name</th>
+                  <th>Số lượng người tham gia</th>
+                  <th>Thanh toán (Trạng thái)</th>
+                  <th>Email</th>
+                  <th>Timer (giờ đặt)</th>
+                </tr>
+              </thead>
+              <tbody id="orderTableBody">
+                <tr><td colspan="7" class="text-center">Đang tải...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- yêu cầu tư vấn -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-white border-0 pt-4">
+            <h1 class="h3 text-success">📞 Danh sách yêu cầu tư vấn</h1>
+          </div>
+          <div class="card-body">
+            <table class="table table-hover table-striped align-middle" id="tb2">
+              <thead class="bg-secondary text-white">
+                <tr class="bg-white">
+                  <td colspan="7" class="text-end">
+                    <button class="btn btn-warning" onclick="xoaHet()">Delete All</button>
+                  </td>
+                </tr>
+                <tr>
+                  <th>STT</th>
+                  <th>Name</th>
+                  <th>Nơi đến</th>
+                  <th>Phone</th>
+                  <th>Số khách</th>
+                  <th>Ngày dự kiện</th>
+                  <th>Ghi chú</th>
+                </tr>
+                
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+              
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../js/quang.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof load === "function") {
+        load(); 
+      }
+      // ===================== HIỂN THỊ ĐƠN HÀNG =====================
+      const tableBody = document.getElementById("orderTableBody");
+      let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+      if (orders.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">Chưa có đơn hàng</td></tr>';
+      } else {
+        orders.forEach((order, index) => {
+          // Lấy số lượng người tham gia: ưu tiên order.tongNguoi, rồi order.quantity, rồi tổng người lớn+trẻ em
+          let soLuong = order.tongNguoi || order.quantity || (order.soNguoiLon + order.soTreEm) || '?';
+          // Lấy thời gian đặt: ưu tiên order.thoiGianDat, rồi order.time
+          let thoiGian = order.thoiGianDat || order.time || 'Chưa rõ';
+          // Lấy số điện thoại
+          let soDienThoai = order.soDienThoai || order.phone || 'Chưa cập nhật';
+          // Tên tour
+          let tenTour = order.tourName || order.name || 'Không rõ';
+          // Trạng thái
+          let trangThai = order.status || 'Chưa thanh toán';
+          let badgeClass = trangThai === 'Đã thanh toán' ? 'bg-success' : 'bg-warning';
+          if (trangThai.includes('Chờ thanh toán tiền mặt')) badgeClass = 'bg-info text-dark';
+
+          const row = `
+            <tr>
+              <td><strong>${order.id}</strong></td>
+              <td>${soDienThoai}</td>
+              <td>${tenTour}</td>
+              <td>${soLuong}</td>
+              <td><span class="badge ${badgeClass}">${trangThai}</span></td>
+              <td>${order.email || 'Chưa có'}</td>
+              <td>${thoiGian}</td>
+            </tr>
+          `;
+          tableBody.innerHTML += row;
+        });
+      }
+    });
+  </script>
+</body>
+</html>
