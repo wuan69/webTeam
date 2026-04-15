@@ -254,13 +254,16 @@
         <section class="mt-4">
         <div class="border rounded p-3 shadow-sm bg-white" >
             <h4 class="mb-3">Tỷ lệ thanh toán</h4>
-            <div class="d-flex gap-3">
-            <button class="btn  payment-card1 border border-end-0 rounded active" onclick="chon1(this)">
-                Thanh toán 100%
-            </button>
-            <button class="btn  payment-card1 border border-end-0 rounded active"  onclick="chon1(this)">
-                Thanh toán 50%
-            </button>
+            <div class="btn-group w-100 mb-3" role="group">
+                <input type="radio" class="btn-check" name="tyle" id="pay100" value="100" checked>
+                <label class="btn btn-outline-warning" for="pay100">
+                    Thanh toán 100%
+                </label>
+                <input type="radio" class="btn-check" name="tyle" id="pay50" value="50">
+                <label class="btn btn-outline-warning" for="pay50">
+                    Thanh toán 50%
+                </label>
+            </div>
         </div>
         <div class="border rounded p-3 bg-light">
             <div class="d-flex justify-content-between align-items-center mb-2">
@@ -282,19 +285,15 @@
 
     <div class="container pt-4 pb-4 mt-4 border rounded">
         <h4>Chọn phương thức thanh toán</h4>
-        <div class="row mt-3">
-            <div class="col-6">
-                <div class="payment-card2 border rounded shadow-sm p-3 h-100" style="cursor: pointer;" onclick="chon2(this)">
-                    <h5>Chuyển khoản ngân hàng</h5>
-                    <small>Giữ chỗ tức thì</small>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="payment-card2 border rounded shadow-sm p-3 h-100" style="cursor: pointer;" onclick="chon2(this)">
-                    <h5>Thanh toán tiền mặt</h5>
-                    <small>Tại văn phòng</small>
-                </div>
-            </div>
+        <div class="btn-group w-100 mb-3" role="group">
+            <input type="radio" class="btn-check" name="pttt" id="bank" value="bank" checked>
+            <label class="btn btn-outline-warning" for="bank">
+                Chuyển khoản ngân hàng
+            </label>
+            <input type="radio" class="btn-check" name="pttt" id="cash" value="cash">
+            <label class="btn btn-outline-warning" for="cash">
+                Thanh toán tiền mặt
+            </label>
         </div>
     </div>
   <!--  -->
@@ -412,221 +411,240 @@
     </footer>
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="../js/jquery-4.0.0.js"></script>
-
-<script src="../js/bootstrap.bundle.min.js"></script>
-<script src="../js/jquery-4.0.0.js"></script>
-<script src="../js/bootstrap.bundle.min.js"></script>
-<script src="../js/jquery-4.0.0.js"></script>
 <script>
     // ===================== KIỂM TRA FORM =====================
-    function ktrTen() {
-        let name = document.getElementById("nameForm").value.trim();
-        let chkName = /^[A-ZÀ-Ỹ][a-zà-ỹ]*(\s[A-ZÀ-Ỹ][a-zà-ỹ]*)*$/;
-        if (chkName.test(name) && name !== "") {
-            document.getElementById("not1").innerHTML = "Hợp lệ";
-            document.getElementById("not1").style.color = "green";
-            return true;
-        } else {
-            document.getElementById("not1").innerHTML = "Họ tên không hợp lệ (VD: Nguyễn Văn A)";
-            document.getElementById("not1").style.color = "red";
-            return false;
-        }
-    }
-    function ktrPhone() {
-        let phone = document.getElementById("phoneForm").value.trim();
-        let chkPhone = /^(0[0-9]{9}|(\+84)[0-9]{9})$/;
-        if (chkPhone.test(phone)) {
-            document.getElementById("not2").innerHTML = "Hợp lệ";
-            document.getElementById("not2").style.color = "green";
-            return true;
-        } else {
-            document.getElementById("not2").innerHTML = "Số điện thoại không hợp lệ (VD: 0909123456)";
-            document.getElementById("not2").style.color = "red";
-            return false;
-        }
-    }
-    function ktrEmail() {
-        let email = document.getElementById("emailForm").value.trim();
-        let chkEmail = /@.*\.com$/;
-        if (chkEmail.test(email) && email !== "") {
-            document.getElementById("not3").innerHTML = "Hợp lệ";
-            document.getElementById("not3").style.color = "green";
-            return true;
-        } else {
-            document.getElementById("not3").innerHTML = "Email không hợp lệ (VD: ten@example.com)";
-            document.getElementById("not3").style.color = "red";
-            return false;
-        }
-    }
-    function kiemTra() {
-        let checkbox = document.getElementById("agree");
-        let btn = document.getElementById("btnThanhToan");
-        let ten = document.getElementById("nameForm").value.trim();
-        let phone = document.getElementById("phoneForm").value.trim();
-        let email = document.getElementById("emailForm").value.trim();
-        let chkPhone = /^(0[0-9]{9}|(\+84)[0-9]{9})$/;
-        let chkEmail = /@.*\.com$/;
-        let daChonTyLe = false;
-        let cacNutTyLe = document.getElementsByClassName("payment-card1");
-        for (let i = 0; i < cacNutTyLe.length; i++) {
-            if (cacNutTyLe[i].classList.contains("chon1")) { daChonTyLe = true; break; }
-        }
-        let daChonPhuongThuc = false;
-        let cacNutPhuongThuc = document.getElementsByClassName("payment-card2");
-        for (let i = 0; i < cacNutPhuongThuc.length; i++) {
-            if (cacNutPhuongThuc[i].classList.contains("chon2")) { daChonPhuongThuc = true; break; }
-        }
-        if (checkbox.checked && ten.length >= 2 && chkPhone.test(phone) && chkEmail.test(email) && daChonTyLe && daChonPhuongThuc) {
-            btn.disabled = false;
-        } else {
-            btn.disabled = true;
-        }
-    }
-    function chon1(card) {
-        let ds = document.getElementsByClassName("payment-card1");
-        for (let i = 0; i < ds.length; i++) ds[i].classList.remove("chon1");
-        card.classList.add("chon1");
-        kiemTra();
-    }
-    function chon2(card) {
-        let ds = document.getElementsByClassName("payment-card2");
-        for (let i = 0; i < ds.length; i++) ds[i].classList.remove("chon2");
-        card.classList.add("chon2");
-        kiemTra();
-    }
-    function layTyLeThanhToan() {
-        let cards = document.getElementsByClassName("payment-card1");
-        for (let i = 0; i < cards.length; i++) {
-            if (cards[i].classList.contains("chon1")) return cards[i].innerText.trim();
-        }
-        return "Thanh toán 100%";
-    }
-    function layPhuongThucThanhToan() {
-        let cards = document.getElementsByClassName("payment-card2");
-        for (let i = 0; i < cards.length; i++) {
-            if (cards[i].classList.contains("chon2")) return cards[i].innerText.trim();
-        }
-        return "Chuyển khoản ngân hàng";
-    }
-    function layDuLieu() {
-        let nguoiLon = parseInt(localStorage.getItem("nguoiLon")) || 0;
-        let treEm = parseInt(localStorage.getItem("treEm")) || 0;
-        let inputNguoiLon = document.getElementById("nguoiLon");
-        let inputTreEm = document.getElementById("treEm");
-        let inputSoNguoi = document.getElementById("soNguoiDiCung");
-        if (inputNguoiLon) inputNguoiLon.value = nguoiLon;
-        if (inputTreEm) inputTreEm.value = treEm;
-        let tong = nguoiLon + treEm;
-        if (inputSoNguoi) inputSoNguoi.value = tong;
-        let formThongTin = document.getElementById("formThongTin");
-        if (formThongTin) formThongTin.style.display = tong > 0 ? "block" : "none";
-    }
-    // ===================== XỬ LÝ NÚT THANH TOÁN =====================
-   document.getElementById("btnThanhToan").onclick = function () {
-    let hoTen = document.getElementById("nameForm").value.trim();
-    let soDienThoai = document.getElementById("phoneForm").value.trim();
-    let email = document.getElementById("emailForm").value.trim();
-    let ghiChu = document.querySelector("textarea")?.value || "";
-    let soNguoiLon = parseInt(document.getElementById("nguoiLon")?.value) || 0;
-    let soTreEm = parseInt(document.getElementById("treEm")?.value) || 0;
-    let tyLe = layTyLeThanhToan();
-    let phuongThuc = layPhuongThucThanhToan();
+function ktrTen() {
+    let name = document.getElementById("nameForm").value.trim();
+    let chkName = /^[A-ZÀ-Ỹ][a-zà-ỹ]*(\s[A-ZÀ-Ỹ][a-zà-ỹ]*)*$/;
 
-    let tourInfo = JSON.parse(localStorage.getItem("selectedTour")) || {
-        name: "Tour Quảng Ngãi - Lý Sơn",
-        pricePerAdult: 1200000,
-        pricePerChild: 900000,
-        prefix: "QN"
-    };
-    let thanhTien = (soNguoiLon * tourInfo.pricePerAdult) + (soTreEm * tourInfo.pricePerChild);
-    let tienCanThanhToan = tyLe.includes("100%") ? thanhTien : thanhTien / 2;
-
-    let thongTinDatTour = {
-        hoTen: hoTen,
-        soDienThoai: soDienThoai,
-        email: email,
-        ghiChu: ghiChu,
-        soNguoiLon: soNguoiLon,
-        soTreEm: soTreEm,
-        tour: tourInfo,
-        tyLeThanhToan: tyLe,
-        phuongThucThanhToan: phuongThuc,
-        thanhTien: thanhTien,
-        tienCanThanhToan: tienCanThanhToan
-    };
-    localStorage.setItem("thongTinDatTour", JSON.stringify(thongTinDatTour));
-
-    // Xử lý theo phương thức thanh toán
-    if (phuongThuc.toLowerCase().includes("tiền mặt")) {
-        // Thanh toán tiền mặt: xử lý ngay, không qua trang thanh toán
-        let prefix = tourInfo.prefix || "TOUR";
-        let randomNum = Math.floor(1000000 + Math.random() * 9000000);
-        let tourId = `${prefix}-${randomNum}`;
-        let orders = JSON.parse(localStorage.getItem("orders")) || [];
-        let newOrder = {
-            id: tourId,
-            tourName: tourInfo.name,
-            hoTen: hoTen,
-            soDienThoai: soDienThoai,
-            email: email,
-            soNguoiLon: soNguoiLon,
-            soTreEm: soTreEm,
-            tongNguoi: soNguoiLon + soTreEm,
-            tongTien: thanhTien,
-            daThanhToan: 0,
-            status: "Chờ thanh toán tiền mặt tại văn phòng",
-            thoiGianDat: new Date().toLocaleString(),
-            phuongThuc: phuongThuc,
-            tyLe: tyLe,
-            ghiChu: ghiChu,
-            soTienCanThanhToan: tienCanThanhToan
-        };
-        orders.push(newOrder);
-        localStorage.setItem("orders", JSON.stringify(orders));
-        alert(`✅ ĐẶT TOUR THÀNH CÔNG!\nMã đơn: ${tourId}\nVui lòng đến văn phòng thanh toán trong 24h để giữ chỗ.`);
-        window.location.href = "home.html";
+    if (chkName.test(name) && name !== "") {
+        document.getElementById("not1").innerHTML = "Hợp lệ";
+        document.getElementById("not1").style.color = "green";
+        return true;
     } else {
-        // Chuyển khoản ngân hàng: sang trang thanh toán
-        window.location.href = "../html/thanhtoan.html";
+        document.getElementById("not1").innerHTML = "Họ tên không hợp lệ (VD: Nguyễn Văn A)";
+        document.getElementById("not1").style.color = "red";
+        return false;
     }
-};
+}
 
-    // ===================== KHỞI TẠO =====================
-    document.addEventListener("DOMContentLoaded", function () {
-        layDuLieu();
-        let nameInput = document.getElementById("nameForm");
-        let phoneInput = document.getElementById("phoneForm");
-        let emailInput = document.getElementById("emailForm");
-        let agreeCheck = document.getElementById("agree");
-        if (nameInput) {
-            nameInput.addEventListener("input", function () { ktrTen(); kiemTra(); });
-            nameInput.addEventListener("blur", ktrTen);
-        }
-        if (phoneInput) {
-            phoneInput.addEventListener("input", function () { ktrPhone(); kiemTra(); });
-            phoneInput.addEventListener("blur", ktrPhone);
-        }
-        if (emailInput) {
-            emailInput.addEventListener("input", function () { ktrEmail(); kiemTra(); });
-            emailInput.addEventListener("blur", ktrEmail);
-        }
-        if (agreeCheck) agreeCheck.addEventListener("change", kiemTra);
-        let modalName = document.getElementById("name");
-        let modalPhone = document.getElementById("phone");
-        if (modalName) {
-            modalName.addEventListener("input", ktrTenModal);
-            modalName.addEventListener("blur", ktrTenModal);
-        }
-        if (modalPhone) {
-            modalPhone.addEventListener("input", chkPhone);
-            modalPhone.addEventListener("blur", chkPhone);
-        }
-        let firstCard1 = document.querySelector(".payment-card1");
-        let firstCard2 = document.querySelector(".payment-card2");
-        if (firstCard1 && !document.querySelector(".payment-card1.chon1")) firstCard1.classList.add("chon1");
-        if (firstCard2 && !document.querySelector(".payment-card2.chon2")) firstCard2.classList.add("chon2");
-        kiemTra();
+function ktrPhone() {
+    let phone = document.getElementById("phoneForm").value.trim();
+    let chkPhone = /^(0[0-9]{9}|(\+84)[0-9]{9})$/;
+
+    if (chkPhone.test(phone)) {
+        document.getElementById("not2").innerHTML = "Hợp lệ";
+        document.getElementById("not2").style.color = "green";
+        return true;
+    } else {
+        document.getElementById("not2").innerHTML = "Số điện thoại không hợp lệ (VD: 0909123456)";
+        document.getElementById("not2").style.color = "red";
+        return false;
+    }
+}
+
+function ktrEmail() {
+    let email = document.getElementById("emailForm").value.trim();
+    let chkEmail = /@.*\.com$/;
+
+    if (chkEmail.test(email) && email !== "") {
+        document.getElementById("not3").innerHTML = "Hợp lệ";
+        document.getElementById("not3").style.color = "green";
+        return true;
+    } else {
+        document.getElementById("not3").innerHTML = "Email không hợp lệ (VD: ten@example.com)";
+        document.getElementById("not3").style.color = "red";
+        return false;
+    }
+}
+
+// ===================== LẤY DỮ LIỆU RADIO =====================
+function layTyLeThanhToan() {
+    let dl = document.querySelector('input[name="tyle"]:checked');
+    return dl ? dl.value : "100";
+}
+
+function layPhuongThucThanhToan() {
+    let dl = document.querySelector('input[name="pttt"]:checked');
+    return dl ? dl.value : "bank";
+}
+
+// ===================== LẤY DỮ LIỆU TỪ TRANG TRƯỚC =====================
+function layDuLieu() {
+    let nguoiLon = parseInt(localStorage.getItem("nguoiLon")) || 0;
+    let treEm = parseInt(localStorage.getItem("treEm")) || 0;
+
+    let inputNguoiLon = document.getElementById("nguoiLon");
+    let inputTreEm = document.getElementById("treEm");
+    let inputSoNguoi = document.getElementById("soNguoiDiCung");
+
+    if (inputNguoiLon) inputNguoiLon.value = nguoiLon;
+    if (inputTreEm) inputTreEm.value = treEm;
+    if (inputSoNguoi) inputSoNguoi.value = nguoiLon + treEm;
+
+    let formThongTin = document.getElementById("formThongTin");
+    if (formThongTin) formThongTin.style.display = (nguoiLon + treEm) > 0 ? "block" : "none";
+}
+
+// ===================== KIỂM TRA NÚT THANH TOÁN =====================
+function kiemTra() {
+    let checkbox = document.getElementById("agree");
+    let btn = document.getElementById("btnThanhToan");
+
+    let ten = document.getElementById("nameForm").value.trim();
+    let phone = document.getElementById("phoneForm").value.trim();
+    let email = document.getElementById("emailForm").value.trim();
+
+    let chkTen = /^[A-ZÀ-Ỹ][a-zà-ỹ]*(\s[A-ZÀ-Ỹ][a-zà-ỹ]*)*$/;
+    let chkPhone = /^(0[0-9]{9}|(\+84)[0-9]{9})$/;
+    let chkEmail = /@.*\.com$/;
+
+    let daChonTyLe = document.querySelector('input[name="tyle"]:checked') !== null;
+    let daChonPhuongThuc = document.querySelector('input[name="pttt"]:checked') !== null;
+
+    if (
+        checkbox &&
+        checkbox.checked &&
+        chkTen.test(ten) &&
+        chkPhone.test(phone) &&
+        chkEmail.test(email) &&
+        daChonTyLe &&
+        daChonPhuongThuc
+    ) {
+        btn.disabled = false;
+    } else {
+        btn.disabled = true;
+    }
+}
+
+// ===================== XỬ LÝ NÚT THANH TOÁN =====================
+document.addEventListener("DOMContentLoaded", function () {
+    layDuLieu();
+
+    let nameInput = document.getElementById("nameForm");
+    let phoneInput = document.getElementById("phoneForm");
+    let emailInput = document.getElementById("emailForm");
+    let agreeCheck = document.getElementById("agree");
+    let btnThanhToan = document.getElementById("btnThanhToan");
+
+    if (nameInput) {
+        nameInput.addEventListener("input", function () {
+            ktrTen();
+            kiemTra();
+        });
+        nameInput.addEventListener("blur", function () {
+            ktrTen();
+            kiemTra();
+        });
+    }
+
+    if (phoneInput) {
+        phoneInput.addEventListener("input", function () {
+            ktrPhone();
+            kiemTra();
+        });
+        phoneInput.addEventListener("blur", function () {
+            ktrPhone();
+            kiemTra();
+        });
+    }
+
+    if (emailInput) {
+        emailInput.addEventListener("input", function () {
+            ktrEmail();
+            kiemTra();
+        });
+        emailInput.addEventListener("blur", function () {
+            ktrEmail();
+            kiemTra();
+        });
+    }
+    if (agreeCheck) {
+        agreeCheck.addEventListener("change", kiemTra);
+    }
+
+    let dsTyLe = document.querySelectorAll('input[name="tyle"]');
+    dsTyLe.forEach(function (item) {
+        item.addEventListener("change", kiemTra);
     });
+
+    let dsPhuongThuc = document.querySelectorAll('input[name="pttt"]');
+    dsPhuongThuc.forEach(function (item) {
+        item.addEventListener("change", kiemTra);
+    });
+
+    if (btnThanhToan) {
+        btnThanhToan.onclick = function () {
+            let hoTen = document.getElementById("nameForm").value.trim();
+            let soDienThoai = document.getElementById("phoneForm").value.trim();
+            let email = document.getElementById("emailForm").value.trim();
+            let ghiChu = document.querySelector("textarea")?.value || "";
+            let soNguoiLon = parseInt(document.getElementById("nguoiLon")?.value) || 0;
+            let soTreEm = parseInt(document.getElementById("treEm")?.value) || 0;
+
+            let tyLe = layTyLeThanhToan();           // "100" hoặc "50"
+            let phuongThuc = layPhuongThucThanhToan(); // "bank" hoặc "cash"
+            // chua co thong tin cac tour
+            //let tourInfo = JSON.parse(localStorage.getItem("selectedTour"));
+            //     if (!tourInfo) {
+            //         alert("Không có dữ liệu tour!");
+            //         window.location.href = "home.html";
+            // }
+            //let thanhTien = (soNguoiLon * tourInfo.pricePerAdult) + (soTreEm * tourInfo.pricePerChild);
+            //let tienCanThanhToan = tyLe === "100" ? thanhTien : thanhTien / 2;
+
+            let thongTinDatTour = {
+                hoTen: hoTen,
+                soDienThoai: soDienThoai,
+                email: email,
+                ghiChu: ghiChu,
+                soNguoiLon: soNguoiLon,
+                soTreEm: soTreEm,
+                //tour: tourInfo,
+                tyLeThanhToan: tyLe,
+                phuongThucThanhToan: phuongThuc,
+                //thanhTien: thanhTien,
+                //tienCanThanhToan: tienCanThanhToan
+            };
+
+            localStorage.setItem("thongTinDatTour", JSON.stringify(thongTinDatTour));
+
+            if (phuongThuc === "cash") {
+                //let prefix = tourInfo.prefix || "TOUR";
+                //let randomNum = Math.floor(1000000 + Math.random() * 9000000);
+                //let tourId = `${prefix}-${randomNum}`;
+
+                let orders = JSON.parse(localStorage.getItem("orders")) || [];
+                let newOrder = {
+                    id: tourId,
+                    hoTen: hoTen,
+                    soDienThoai: soDienThoai,
+                    email: email,
+                    soNguoiLon: soNguoiLon,
+                    soTreEm: soTreEm,
+                    tongNguoi: soNguoiLon + soTreEm,
+                    tongTien: thanhTien,
+                    daThanhToan: 0,
+                    status: "Chờ thanh toán tiền mặt tại văn phòng",
+                    thoiGianDat: new Date().toLocaleString(),
+                    phuongThuc: phuongThuc,
+                    tyLe: tyLe,
+                    ghiChu: ghiChu,
+                    //soTienCanThanhToan: tienCanThanhToan
+                };
+
+                orders.push(newOrder);
+                localStorage.setItem("orders", JSON.stringify(orders));
+                alert(`✅ ĐẶT TOUR THÀNH CÔNG!\nMã đơn: ${tourId}\nVui lòng đến văn phòng thanh toán trong 24h để giữ chỗ.`);
+                window.location.href = "home.html";
+            } else {
+                window.location.href = "../html/thanhtoan.html";
+            }
+        };
+    }
+
+    kiemTra();
+});
 </script>
 </body>
 </html>

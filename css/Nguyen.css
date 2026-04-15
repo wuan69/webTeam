@@ -32,17 +32,8 @@ body {
 #imgKhien{
     width: 25px;
 }
-.chon1 + .chon2{
-    background-color:#fbcd04 !important;
-    color: white;
-}
 #time{
     width: 24px;
 }
-.chon1 {
-    background: #fbcd04 !important;
-}
-.chon2 {
-    background: #fbcd04 !important;
-}
+
 
