@@ -260,7 +260,7 @@
           <div class="d-flex justify-content-between align-items-center">
             <div>
               <div class="text-secondary text-decoration-line-through">4.500.000đ</div>
-              <div class="price-tag">4.150.000đ</div>
+              <div class="price-tag" id="tongTienDisplay" data-base-price="4150000">4.150.000đ</div>
             </div>
             <a href="dattour.html" class="btn btn-warning text-dark fw-bold rounded-pill" onclick="luuDuLieu()">ĐẶT TOUR NGAY</a>
           </div>
@@ -268,9 +268,9 @@
             <label class="form-label">Số khách</label>
             <div class="input-group">
               <span class="input-group-text"  id="nguoiLon">Người lớn</span>
-              <input type="number" class="form-control" value="2" min="1">
+              <input type="number" id="nguoiLon" class="form-control" value="1" min="1" oninput="tinhTongTien()">
               <span class="input-group-text" >Trẻ em</span>
-              <input type="number" class="form-control" value="0" min="0" id="treEm">
+              <input type="number" id="nguoiLon" class="form-control" value="1" min="1" oninput="tinhTongTien()">
             </div>
           </div>
           <div class="mt-2 small">Nơi khởi hành: TP. Hồ Chí Minh</div>
