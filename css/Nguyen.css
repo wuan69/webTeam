@@ -6,28 +6,17 @@ body {
     height: 35px;
     border-radius: 50%;
     background: #dee2e6;
-    color: #6c757d;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-}
-.step-circle.done {
-    background: #E8B84B;
-    color: white;
-}
-.step-circle.current {
-    background:#E8B84B;
-    color: white;
 }
 .step-line {
     flex: 1;
     height: 3px;
     background: #dee2e6;
     margin: 0 10px;
-}
-.step-line.done {
-    background: rgb(53, 53, 250);
 }
 #imgKhien{
     width: 25px;
