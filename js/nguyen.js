@@ -45,15 +45,15 @@ function ktrEmail() {
 }
 
 // ===================== LẤY DỮ LIỆU RADIO =====================
-function layTyLeThanhToan() {
-    let dl = document.querySelector('input[name="tyle"]:checked');
-    return dl ? dl.value : "100";
-}
+// function layTyLeThanhToan() {
+//     let dl = document.querySelector('input[name="tyle"]:checked');
+//     return dl ? dl.value : "100";
+// }
 
-function layPhuongThucThanhToan() {
-    let dl = document.querySelector('input[name="pttt"]:checked');
-    return dl ? dl.value : "bank";
-}
+// function layPhuongThucThanhToan() {
+//     let dl = document.querySelector('input[name="pttt"]:checked');
+//     return dl ? dl.value : "bank";
+// }
 
 // ===================== LẤY DỮ LIỆU TỪ TRANG TRƯỚC =====================
 function layDuLieu() {
@@ -85,17 +85,17 @@ function kiemTra() {
     let chkPhone = /^(0[0-9]{9}|(\+84)[0-9]{9})$/;
     let chkEmail = /@.*\.com$/;
 
-    let daChonTyLe = document.querySelector('input[name="tyle"]:checked') !== null;
-    let daChonPhuongThuc = document.querySelector('input[name="pttt"]:checked') !== null;
+    // let daChonTyLe = document.querySelector('input[name="tyle"]:checked') !== null;
+    // let daChonPhuongThuc = document.querySelector('input[name="pttt"]:checked') !== null;
 
     if (
         checkbox &&
         checkbox.checked &&
         chkTen.test(ten) &&
         chkPhone.test(phone) &&
-        chkEmail.test(email) &&
-        daChonTyLe &&
-        daChonPhuongThuc
+        chkEmail.test(email)
+        // daChonTyLe &&
+        // daChonPhuongThuc
     ) {
         btn.disabled = false;
     } else {
@@ -149,15 +149,15 @@ document.addEventListener("DOMContentLoaded", function () {
         agreeCheck.addEventListener("change", kiemTra);
     }
 
-    let dsTyLe = document.querySelectorAll('input[name="tyle"]');
-    dsTyLe.forEach(function (item) {
-        item.addEventListener("change", kiemTra);
-    });
+    // let dsTyLe = document.querySelectorAll('input[name="tyle"]');
+    // dsTyLe.forEach(function (item) {
+    //     item.addEventListener("change", kiemTra);
+    // });
 
-    let dsPhuongThuc = document.querySelectorAll('input[name="pttt"]');
-    dsPhuongThuc.forEach(function (item) {
-        item.addEventListener("change", kiemTra);
-    });
+    // let dsPhuongThuc = document.querySelectorAll('input[name="pttt"]');
+    // dsPhuongThuc.forEach(function (item) {
+    //     item.addEventListener("change", kiemTra);
+    // });
 
     if (btnThanhToan) {
         btnThanhToan.onclick = function () {
@@ -168,8 +168,8 @@ document.addEventListener("DOMContentLoaded", function () {
             let soNguoiLon = parseInt(document.getElementById("nguoiLon")?.value) || 0;
             let soTreEm = parseInt(document.getElementById("treEm")?.value) || 0;
 
-            let tyLe = layTyLeThanhToan();           // "100" hoặc "50"
-            let phuongThuc = layPhuongThucThanhToan(); // "bank" hoặc "cash"
+            // let tyLe = layTyLeThanhToan();           // "100" hoặc "50"
+            // let phuongThuc = layPhuongThucThanhToan(); // "bank" hoặc "cash"
             // chua co thong tin cac tour
             //let tourInfo = JSON.parse(localStorage.getItem("selectedTour"));
             //     if (!tourInfo) {
@@ -187,45 +187,45 @@ document.addEventListener("DOMContentLoaded", function () {
                 soNguoiLon: soNguoiLon,
                 soTreEm: soTreEm,
                 //tour: tourInfo,
-                tyLeThanhToan: tyLe,
-                phuongThucThanhToan: phuongThuc,
+                // tyLeThanhToan: tyLe,
+                // phuongThucThanhToan: phuongThuc,
                 //thanhTien: thanhTien,
                 //tienCanThanhToan: tienCanThanhToan
             };
 
             localStorage.setItem("thongTinDatTour", JSON.stringify(thongTinDatTour));
 
-            if (phuongThuc === "cash") {
-                //let prefix = tourInfo.prefix || "TOUR";
-                //let randomNum = Math.floor(1000000 + Math.random() * 9000000);
-                //let tourId = `${prefix}-${randomNum}`;
+            // if (phuongThuc === "cash") {
+            //     //let prefix = tourInfo.prefix || "TOUR";
+            //     //let randomNum = Math.floor(1000000 + Math.random() * 9000000);
+            //     //let tourId = `${prefix}-${randomNum}`;
 
-                let orders = JSON.parse(localStorage.getItem("orders")) || [];
-                let newOrder = {
-                    id: tourId,
-                    hoTen: hoTen,
-                    soDienThoai: soDienThoai,
-                    email: email,
-                    soNguoiLon: soNguoiLon,
-                    soTreEm: soTreEm,
-                    tongNguoi: soNguoiLon + soTreEm,
-                    tongTien: thanhTien,
-                    daThanhToan: 0,
-                    status: "Chờ thanh toán tiền mặt tại văn phòng",
-                    thoiGianDat: new Date().toLocaleString(),
-                    phuongThuc: phuongThuc,
-                    tyLe: tyLe,
-                    ghiChu: ghiChu,
-                    //soTienCanThanhToan: tienCanThanhToan
-                };
+            //     let orders = JSON.parse(localStorage.getItem("orders")) || [];
+            //     let newOrder = {
+            //         id: tourId,
+            //         hoTen: hoTen,
+            //         soDienThoai: soDienThoai,
+            //         email: email,
+            //         soNguoiLon: soNguoiLon,
+            //         soTreEm: soTreEm,
+            //         tongNguoi: soNguoiLon + soTreEm,
+            //         tongTien: thanhTien,
+            //         daThanhToan: 0,
+            //         status: "Chờ thanh toán tiền mặt tại văn phòng",
+            //         thoiGianDat: new Date().toLocaleString(),
+            //         phuongThuc: phuongThuc,
+            //         tyLe: tyLe,
+            //         ghiChu: ghiChu,
+            //         //soTienCanThanhToan: tienCanThanhToan
+            //     };
 
-                orders.push(newOrder);
-                localStorage.setItem("orders", JSON.stringify(orders));
-                alert(`✅ ĐẶT TOUR THÀNH CÔNG!\nMã đơn: ${tourId}\nVui lòng đến văn phòng thanh toán trong 24h để giữ chỗ.`);
-                window.location.href = "home.html";
-            } else {
+                // orders.push(newOrder);
+                // localStorage.setItem("orders", JSON.stringify(orders));
+                // alert(`✅ ĐẶT TOUR THÀNH CÔNG!\nMã đơn: ${tourId}\nVui lòng đến văn phòng thanh toán trong 24h để giữ chỗ.`);
+                // window.location.href = "home.html";
+            // } else {
                 window.location.href = "../html/thanhtoan.html";
-            }
+          //  }
         };
     }
 

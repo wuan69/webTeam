@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,7 @@
     <!-- icon -->
     <link rel="icon" href="../img/icon-link.png" type="image/png">
     <!-- css -->
-     <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="">
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/bootstrap-icons-1.13.1/bootstrap-icons.css">
     <script src="../js/jquery-4.0.0.js"></script>
@@ -17,10 +18,12 @@
         body {
             background: #f5f7fb;
         }
+
         .card-custom {
             border-radius: 16px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
+
         .qr-box {
             background: linear-gradient(135deg, #2b7cff, #1A4D64);
             padding: 20px;
@@ -29,24 +32,29 @@
             height: 100%;
             border-radius: 16px 0 0 16px;
         }
+
         .qr-box img {
             width: 280px;
             background: #fff;
             padding: 10px;
             border-radius: 10px;
         }
+
         .bank-card {
             border-radius: 0 16px 16px 0;
         }
+
         .info-item {
             background: #f8f9fa;
             border-radius: 10px;
             padding: 10px;
         }
+
         .btn-confirm {
             border-radius: 30px;
             height: 50px;
         }
+
         .btn-copy {
             border-radius: 999px;
             padding: 4px 12px;
@@ -58,235 +66,32 @@
             transition: all 0.2s ease;
             cursor: pointer;
         }
+
         .btn-copy:hover {
             background: #0d6efd;
             color: #fff;
             transform: scale(0.96);
         }
+
         .card-custom {
             transition: transform 0.2s, box-shadow 0.2s;
         }
+
         .card-custom:hover,
         .qr-box:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
         }
+
         .alert-warning {
             background-color: #fff3cd;
             border-left: 4px solid #ffc107;
         }
+
         main {
             margin-top: 140px;
         }
     </style>
-    <script>
-    // Hàm gửi thông báo cho owner
-    function thongBaoChoOwner(noiDung, loai = "don_hang") {
-        let subject = loai === "tu_van" ? "Yêu cầu tư vấn tour" : "Đơn hàng mới cần xác nhận";
-        let body = encodeURIComponent(noiDung);
-        window.open(`mailto:owner@nangcentraltour.com?subject=${subject}&body=${body}`);
-    }
-
-    // Validate modal (giữ nguyên)
-    function ktrTen() {
-        let name = document.getElementById("name").value;
-        let chkName = /^[A-Z][a-z]*(\s[A-Z][a-z]*)+$/;
-        let er = document.getElementById("er1");
-        if (chkName.test(name)) {
-            er.innerHTML = "Valid";
-            er.style.color = "green";
-            return true;
-        } else {
-            er.innerHTML = "Unvalid";
-            er.style.color = "red";
-            return false;
-        }
-    }
-    function chkPhone() {
-        let phone = document.getElementById("phone").value;
-        let chkPhone = /^0[2-9]\d-\d{7}$/;
-        let er = document.getElementById("er2");
-        if (chkPhone.test(phone)) {
-            er.innerHTML = "Valid";
-            er.style.color = "green";
-            return true;
-        } else {
-            er.innerHTML = "Unvalid";
-            er.style.color = "red";
-            return false;
-        }
-    }
-    function yeuCau() {
-        let ten = document.getElementById("name").value.trim();
-        let phone = document.getElementById("phone").value.trim();
-        if (!ten || !phone) {
-            alert("Vui lòng nhập đầy đủ họ tên và số điện thoại.");
-            return;
-        }
-        let dsTuVan = JSON.parse(localStorage.getItem("dsTuVan")) || [];
-        dsTuVan.push({
-            ten: ten,
-            soDienThoai: phone,
-            diaDiem: document.getElementById("diaDiem")?.value || "",
-            soKhach: document.getElementById("SoLuongKhach")?.value || "1",
-            ngayDi: document.getElementById("date")?.value || "",
-            ghiChu: document.getElementById("note")?.value || "",
-            thoiGian: new Date().toLocaleString()
-        });
-        localStorage.setItem("dsTuVan", JSON.stringify(dsTuVan));
-        let noiDung = `YÊU CẦU TƯ VẤN\nHọ tên: ${ten}\nSĐT: ${phone}\nĐiểm đến: ${document.getElementById("diaDiem")?.value || ""}\nSố khách: ${document.getElementById("SoLuongKhach")?.value || "1"}\nNgày dự kiến: ${document.getElementById("date")?.value || ""}\nGhi chú: ${document.getElementById("note")?.value || ""}`;
-        thongBaoChoOwner(noiDung, "tu_van");
-        alert("Cảm ơn bạn! Chúng tôi sẽ liên hệ lại trong thời gian sớm nhất.");
-        let modalElement = document.getElementById('staticBackdrop');
-        let modal = bootstrap.Modal.getInstance(modalElement);
-        if (modal) modal.hide();
-        document.getElementById("name").value = "";
-        document.getElementById("phone").value = "";
-        document.getElementById("er1").innerHTML = "";
-        document.getElementById("er2").innerHTML = "";
-        if (document.getElementById("diaDiem")) document.getElementById("diaDiem").value = "Quảng Ngãi";
-        if (document.getElementById("SoLuongKhach")) document.getElementById("SoLuongKhach").value = "";
-        if (document.getElementById("date")) document.getElementById("date").value = "";
-        if (document.getElementById("note")) document.getElementById("note").value = "";
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        // 1. Đọc dữ liệu từ dattour (key "thongTinDatTour")
-        let thongTin = JSON.parse(localStorage.getItem("thongTinDatTour"));
-        if (!thongTin) {
-            alert("Không tìm thấy thông tin đặt tour. Vui lòng quay lại trang đặt tour.");
-            window.location.href = "dattour.html";
-            return;
-        }
-
-        // Lấy các trường thông tin
-        let hoTen = thongTin.hoTen || "Khách hàng";
-        let soDienThoai = thongTin.soDienThoai || "Chưa cập nhật";
-        let email = thongTin.email || "chua_cap_nhat@gmail.com";
-        let soNguoiLon = thongTin.soNguoiLon || 0;
-        let soTreEm = thongTin.soTreEm || 0;
-        let ghiChu = thongTin.ghiChu || "";
-        let tourInfo = thongTin.tour || {
-            name: "Tour Quảng Ngãi - Lý Sơn",
-            pricePerAdult: 1200000,
-            pricePerChild: 900000,
-            prefix: "QN"
-        };
-        let thanhTien = thongTin.thanhTien || 0;               // tổng tiền tour
-        let tienCanThanhToan = thongTin.tienCanThanhToan || thanhTien; // số tiền phải trả (100% hoặc 50%)
-        let tyLe = thongTin.tyLeThanhToan || "Thanh toán 100%";
-        let phuongThuc = thongTin.phuongThucThanhToan || "Chuyển khoản ngân hàng";
-
-        // 2. Tạo mã đơn hàng
-        let prefix = tourInfo.prefix || "TOUR";
-        let randomNum = Math.floor(1000000 + Math.random() * 9000000);
-        let tourId = `${prefix}-${randomNum}`;
-        document.getElementById("orderId").innerText = tourId;
-
-        // 3. Cập nhật nội dung chuyển khoản và số tiền
-        let contentSpan = document.getElementById("content");
-        if (contentSpan) contentSpan.innerText = "NANG CENTRAL TOUR " + tourId;
-
-        let amountSpan = document.getElementById("amount");
-        if (amountSpan) amountSpan.innerText = tienCanThanhToan.toLocaleString("vi-VN") + "đ";
-
-        let btnConfirm = document.getElementById("btnConfirm");
-        if (btnConfirm) {
-            btnConfirm.innerHTML = `<i class="bi bi-check-circle me-2"></i> Tôi đã thanh toán • ${tienCanThanhToan.toLocaleString("vi-VN")}đ`;
-        }
-
-        // 4. Lưu đơn hàng vào localStorage (orders)
-        let orders = JSON.parse(localStorage.getItem("orders")) || [];
-        let newOrder = {
-            id: tourId,
-            tourName: tourInfo.name,
-            hoTen: hoTen,
-            soDienThoai: soDienThoai,
-            email: email,
-            soNguoiLon: soNguoiLon,
-            soTreEm: soTreEm,
-            tongNguoi: soNguoiLon + soTreEm,
-            tongTien: thanhTien,
-            daThanhToan: 0,
-            status: "Chưa thanh toán",
-            thoiGianDat: new Date().toLocaleString(),
-            phuongThuc: phuongThuc,
-            tyLe: tyLe,
-            ghiChu: ghiChu,
-            soTienCanThanhToan: tienCanThanhToan
-        };
-        orders.push(newOrder);
-        localStorage.setItem("orders", JSON.stringify(orders));
-        localStorage.setItem("currentOrderId", tourId);
-
-        // 5. Xử lý copy button
-        const copyButtons = document.querySelectorAll(".btn-copy");
-        copyButtons.forEach((btn) => {
-            btn.addEventListener("click", function () {
-                let textToCopy = "";
-                const parent = btn.closest(".info-item");
-                if (parent) {
-                    const strong = parent.querySelector("strong");
-                    if (strong) textToCopy = strong.innerText.trim();
-                }
-                if (!textToCopy) textToCopy = tourId;
-                if (textToCopy) {
-                    navigator.clipboard.writeText(textToCopy).then(() => {
-                        btn.innerHTML = "Đã copy!";
-                        setTimeout(() => {
-                            btn.innerHTML = '<i class="bi bi-copy me-1"></i> Copy';
-                        }, 1500);
-                    });
-                }
-            });
-        });
-
-        // 6. Xác nhận thanh toán
-        const checkbox = document.getElementById("confirm");
-        if (checkbox && btnConfirm) {
-            btnConfirm.disabled = true;
-            checkbox.addEventListener("change", function () {
-                btnConfirm.disabled = !checkbox.checked;
-                btnConfirm.classList.toggle("btn-success", checkbox.checked);
-                btnConfirm.classList.toggle("btn-secondary", !checkbox.checked);
-            });
-
-            btnConfirm.addEventListener("click", function () {
-                if (!checkbox.checked) {
-                    alert("Bạn chưa xác nhận đã thanh toán!");
-                    return;
-                }
-                let orders = JSON.parse(localStorage.getItem("orders")) || [];
-                const index = orders.findIndex(o => o.id === tourId);
-                if (index !== -1) {
-                    orders[index].status = "Đã thanh toán";
-                    orders[index].daThanhToan = tienCanThanhToan;
-                    localStorage.setItem("orders", JSON.stringify(orders));
-
-                    // Gửi thông báo cho owner
-                    let noiDung = `
-                        ĐƠN HÀNG ĐÃ THANH TOÁN
-                        Mã đơn: ${tourId}
-                        Khách hàng: ${hoTen} - ${soDienThoai} - ${email}
-                        Tour: ${tourInfo.name}
-                        Số lượng: ${soNguoiLon} lớn, ${soTreEm} trẻ em
-                        Tổng tiền tour: ${thanhTien.toLocaleString("vi-VN")}đ
-                        Đã thanh toán: ${tienCanThanhToan.toLocaleString("vi-VN")}đ (${tyLe})
-                        Phương thức: ${phuongThuc}
-                        Ghi chú: ${ghiChu}
-                    `;
-                    thongBaoChoOwner(noiDung, "don_hang");
-
-                    alert("Cảm ơn bạn! Đơn hàng đã được ghi nhận thanh toán.");
-                    btnConfirm.disabled = true;
-                    setTimeout(() => window.location.href = "home.html", 2000);
-                } else {
-                    alert("Không tìm thấy đơn hàng! Mã tour: " + tourId);
-                }
-            });
-        }
-    });
-</script>
 </head>
 
 <body>
@@ -637,7 +442,88 @@
             </div>
         </div>
     </main>
+    <script>
+        let tongTien = localStorage.getItem("tongTienTour");
 
+        if (tongTien) {
+
+            // Ô số tiền bên trái
+            document.getElementById("amount").innerText = tongTien;
+
+            // Nút xác nhận phía dưới
+            document.getElementById("btnConfirm").innerHTML =
+                `<i class="bi bi-check-circle me-2"></i>
+            Tôi đã thanh toán • ${tongTien}`;
+        }
+
+        // nút copy
+        const copyButtons = document.querySelectorAll(".btn-copy");
+
+        copyButtons.forEach(btn => {
+            btn.addEventListener("click", function () {
+
+                let textCopy = this.parentElement.querySelector("strong").innerText;
+
+                navigator.clipboard.writeText(textCopy);
+
+                let oldHtml = this.innerHTML;
+
+                this.innerHTML = '<i class="bi bi-check-lg me-1"></i>Đã copy';
+                this.classList.remove("btn-outline-primary");
+                this.classList.add("btn-success");
+
+                setTimeout(() => {
+                    this.innerHTML = oldHtml;
+                    this.classList.remove("btn-success");
+                }, 1500);
+
+            });
+        });
+
+
+        // ===== CHECKBOX XÁC NHẬN THANH TOÁN =====
+        const checkbox = document.getElementById("confirm");
+        const btnConfirm = document.getElementById("btnConfirm");
+
+        checkbox.addEventListener("change", function () {
+
+            if (this.checked) {
+                btnConfirm.classList.remove("btn-secondary");
+                btnConfirm.classList.add("btn-success");
+                btnConfirm.disabled = false;
+            }
+            else {
+                btnConfirm.classList.remove("btn-success");
+                btnConfirm.classList.add("btn-secondary");
+            }
+        })
+        
+        //Tạo mã đơn TOUR-XXXXXX
+        function taoMaDon() {
+
+            // lấy 6 số cuối của thời gian hiện tại
+            let timePart = Date.now().toString().slice(-6);
+
+            // thêm 3 số random
+            let randomPart = Math.floor(100 + Math.random() * 900);
+
+            return "TOUR-" + timePart + randomPart;
+        }
+
+        window.onload = function () {
+
+            let maDon = taoMaDon();
+
+            // hiện mã đơn
+            document.getElementById("orderId").innerHTML = maDon;
+
+            // lưu lại
+            localStorage.setItem("maDonTour", maDon);
+
+            // đổ luôn vào nội dung chuyển khoản
+            document.getElementById("content").innerHTML = maDon;
+        }
+    </script>
 </body>
 
 </html>

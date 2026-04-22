@@ -8,6 +8,7 @@
   <!-- css -->
   <link rel="stylesheet" href="../css/bootstrap.css">
   <link rel="stylesheet" href="../css/Nguyen.css">
+  <link rel="stylesheet" href="../css/bootstrap-icons-1.13.1/bootstrap-icons.css">
   <script src="../js/quang.js" ></script>
   <link rel="icon" href="../img/icon-link.png" type="image/png">
 </head>
@@ -243,7 +244,7 @@
 
             <!-- FORM -->
             <div id="formThongTin" class="mt-3" style="display: none;">
-                <h5>Thông tin hành khách</h5>
+                <!-- <h5>Thông tin hành khách</h5> -->
 
                 <div id="dsNguoiLon"></div>
                 <div id="dsTreEm"></div>
@@ -252,7 +253,7 @@
 <!-- /////////////////////////////////////////////////////////////////////////////////////// -->
         <!-- phần áp mã -->
         <section class="mt-4">
-        <div class="border rounded p-3 shadow-sm bg-white" >
+        <!-- <div class="border rounded p-3 shadow-sm bg-white" >
             <h4 class="mb-3">Tỷ lệ thanh toán</h4>
             <div class="btn-group w-100 mb-3" role="group">
                 <input type="radio" class="btn-check" name="tyle" id="pay100" value="100" checked>
@@ -264,7 +265,7 @@
                     Thanh toán 50%
                 </label>
             </div>
-        </div>
+        </div> -->
         <div class="border rounded p-3 bg-light">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h5 class="mb-0">Mã giảm giá</h5>
@@ -284,16 +285,16 @@
     </section>
 
     <div class="container pt-4 pb-4 mt-4 border rounded">
-        <h4>Chọn phương thức thanh toán</h4>
+        <h4>Phương thức thanh toán</h4>
         <div class="btn-group w-100 mb-3" role="group">
-            <input type="radio" class="btn-check" name="pttt" id="bank" value="bank" checked>
-            <label class="btn btn-outline-warning" for="bank">
+  
+            <label class="form-control text-light text-center btn-warning" for="bank">
                 Chuyển khoản ngân hàng
             </label>
-            <input type="radio" class="btn-check" name="pttt" id="cash" value="cash">
+            <!-- <input type="radio" class="btn-check" name="pttt" id="cash" value="cash">
             <label class="btn btn-outline-warning" for="cash">
                 Thanh toán tiền mặt
-            </label>
+            </label> -->
         </div>
     </div>
   <!--  -->
@@ -301,7 +302,8 @@
     <!-- Thông báo bảo mật -->
     <div class="mt-4 p-3 border rounded bg-light">
     <p>
-        <span><img id="imgKhien" src="../img/khien.png" alt="anh"></span> Dữ liệu của bạn được bảo mật an toàn.
+      
+        <i class="bi bi-shield-check me-1"></i>Dữ liệu của bạn được bảo mật an toàn.
     </p>
     <p>
         Khi tiếp tục, bạn đồng ý với 
@@ -411,6 +413,6 @@
     </footer>
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="../js/jquery-4.0.0.js"></script>
-
+<script src="../js/nguyen.js"></script>
 </body>
 </html>

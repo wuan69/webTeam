@@ -134,47 +134,5 @@
     </div>
   </div>
   <script src="../js/quang.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      if (typeof load === "function") {
-        load(); 
-      }
-      // ===================== HIỂN THỊ ĐƠN HÀNG =====================
-      const tableBody = document.getElementById("orderTableBody");
-      let orders = JSON.parse(localStorage.getItem("orders")) || [];
-
-      if (orders.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">Chưa có đơn hàng</td></tr>';
-      } else {
-        orders.forEach((order, index) => {
-          // Lấy số lượng người tham gia: ưu tiên order.tongNguoi, rồi order.quantity, rồi tổng người lớn+trẻ em
-          let soLuong = order.tongNguoi || order.quantity || (order.soNguoiLon + order.soTreEm) || '?';
-          // Lấy thời gian đặt: ưu tiên order.thoiGianDat, rồi order.time
-          let thoiGian = order.thoiGianDat || order.time || 'Chưa rõ';
-          // Lấy số điện thoại
-          let soDienThoai = order.soDienThoai || order.phone || 'Chưa cập nhật';
-          // Tên tour
-          let tenTour = order.tourName || order.name || 'Không rõ';
-          // Trạng thái
-          let trangThai = order.status || 'Chưa thanh toán';
-          let badgeClass = trangThai === 'Đã thanh toán' ? 'bg-success' : 'bg-warning';
-          if (trangThai.includes('Chờ thanh toán tiền mặt')) badgeClass = 'bg-info text-dark';
-
-          const row = `
-            <tr>
-              <td><strong>${order.id}</strong></td>
-              <td>${soDienThoai}</td>
-              <td>${tenTour}</td>
-              <td>${soLuong}</td>
-              <td><span class="badge ${badgeClass}">${trangThai}</span></td>
-              <td>${order.email || 'Chưa có'}</td>
-              <td>${thoiGian}</td>
-            </tr>
-          `;
-          tableBody.innerHTML += row;
-        });
-      }
-    });
-  </script>
 </body>
 </html>
