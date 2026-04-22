@@ -7,6 +7,7 @@
   <link rel="icon" href="../img/icon-link.png" type="image/png">
   <link rel="stylesheet" href="../css/bootstrap.css">
   <link rel="stylesheet" href="../css/myStyle.css">
+  <script src="../js/son.js"></script>
   <script>
   function toYYYYMMDD(date) { const y = date.getFullYear(); const m = String(date.getMonth() + 1).padStart(2, "0"); const d = String(date.getDate()).padStart(2, "0"); return `${y}-${m}-${d}`; }
   function todayLocal() { const now = new Date(); now.setHours(0, 0, 0, 0); return now; }
@@ -217,8 +218,10 @@
           <div class="mt-3">
             <label class="form-label">Số khách</label>
             <div class="input-group">
-              <span class="input-group-text">Người lớn</span><input type="number" id="nguoiLon" class="form-control" value="2" min="1">
-              <span class="input-group-text">Trẻ em</span><input type="number" id="treEm" class="form-control" value="0" min="0">
+              <span class="input-group-text">Người lớn</span><input type="number" id="nguoiLon" class="form-control" value="1" min="1" oninput="tinhTongTien()">
+
+              <span class="input-group-text">Trẻ em</span><input type="number" id="treEm" class="form-control" value="0" min="0" oninput="tinhTongTien()">
+
             </div>
           </div>
           <div class="mt-2 small">Nơi khởi hành: Hà Nội / TP. HCM</div>
@@ -305,7 +308,7 @@
                 <li>Vé tham quan cơ bản</li>
               </ul>
               <div class="d-flex gap-2 mt-auto">
-                <button onclick="syncPackageSelection('goi1')" class="btn btn-outline-secondary w-100 fw-bold rounded-pill">Chọn gói</button>
+                 <a href="dattour.html" class="btn btn-outline-primary w-100 rounded-pill">Chọn gói</a>
               </div>
             </div>
           </div>
@@ -330,11 +333,10 @@
                 <li>Bữa trưa hải sản tiêu chuẩn</li>
               </ul>
               <div class="d-flex gap-2 mt-auto">
-                <button onclick="syncPackageSelection('goi2')" class="btn btn-success w-100 fw-bold rounded-pill">Chọn gói này</button>
+                <a href="dattour.html" class="btn btn-primary w-100 rounded-pill">Đặt gói này</a>
               </div>
             </div>
           </div>
-
           <div class="col-md-4">
             <div class="border border-warning rounded-3 p-3 h-100 position-relative" style="background: #fffbeb;">
               <span class="badge bg-warning text-dark position-absolute top-0 end-0 mt-2 me-2"><i class="fa fa-star"></i> Cao cấp</span>
@@ -355,7 +357,7 @@
                 <li>Bao gồm vé máy bay khứ hồi (HN/HCM) </li>
               </ul>
               <div class="d-flex gap-2 mt-auto">
-                <button onclick="syncPackageSelection('goi3')" class="btn btn-warning text-dark w-100 fw-bold rounded-pill">Chọn gói này</button>
+                <a href="dattour.html" class="btn btn-outline-primary w-100 rounded-pill">Chọn gói</a>
               </div>
             </div>
           </div>
