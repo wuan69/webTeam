@@ -6,7 +6,6 @@
   <title>Thông tin Tour – Kỳ quan Lý Sơn | Nắng Central Tour</title>
   <link rel="icon" href="../img/icon-link.png" type="image/png">
   <link rel="stylesheet" href="../css/bootstrap.css">
-  <link rel="stylesheet" href="../css/myStyle.css">
   <script>
   // yyyy-mm-dd cho input date
   function toYYYYMMDD(date) {
@@ -228,8 +227,15 @@
     <section class="row g-3">
       <div class="col-lg-8">
         <div class="bg-white border rounded-3 p-3 shadow-sm">
-          <img src="../img/baolocchammay.jpg" class="w-100 rounded" style="height:360px;object-fit:cover">
+          <img id="heroImg" src="../img/baolocchammay.jpg" class="w-100 rounded" style="height:360px;object-fit:cover">
         </div>
+        <div class="thumbs row row-cols-5 g-2 mt-1">
+              <div class="col"><img onclick="document.getElementById('heroImg').src='../img/baolocchammay.jpg'" src="../img/baolocchammay.jpg" class="w-100 rounded" alt="thumb1"></div>
+              <div class="col"><img onclick="document.getElementById('heroImg').src='../img/baolocchammay1.jpg'" src="../img/baolocchammay1.jpg" class="w-100 rounded" alt="thumb2"></div>
+              <div class="col"><img onclick="document.getElementById('heroImg').src='../img/baolocchammay2.jpg'" src="../img/baolocchammay2.jpg" class="w-100 rounded" alt="thumb3"></div>
+              <div class="col"><img onclick="document.getElementById('heroImg').src='../img/baolocchammay3.jpg'" src="../img/baolocchammay3.jpg" class="w-100 rounded" alt="thumb4"></div>
+              <div class="col"><img onclick="document.getElementById('heroImg').src='../img/baolocchammay4.jpg'" src="../img/baolocchammay4.jpg" class="w-100 rounded" alt="thumb5"></div>
+            </div>
       </div>
       <div class="col-lg-4">
         <aside class="booking-card bg-white border rounded-3 p-3 shadow-sm">
@@ -250,7 +256,7 @@
               <span class="input-group-text">Người lớn</span>
               <input type="number" id="nguoiLon" class="form-control" value="1" min="1" oninput="tinhTongTien()">
               <span class="input-group-text">Trẻ em</span>
-              <input type="number" id="nguoiLon" class="form-control" value="1" min="1" oninput="tinhTongTien()">
+              <input type="number" id="treEm" class="form-control" value="0" min="0" oninput="tinhTongTien()">
             </div>
           <div class="mt-2 small">Nơi khởi hành: TP. Hồ Chí Minh</div>
 
@@ -424,5 +430,7 @@
   </footer>
   <script src="../js/jquery-4.0.0.js"></script>
   <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="../js/son.js"></script>
+
 </body>
 </html>

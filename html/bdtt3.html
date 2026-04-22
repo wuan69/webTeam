@@ -6,7 +6,6 @@
   <title>Thông tin Tour – Kỳ quan Lý Sơn | Nắng Central Tour</title>
   <link rel="icon" href="../img/icon-link.png" type="image/png">
   <link rel="stylesheet" href="../css/bootstrap.css">
-  <link rel="stylesheet" href="../css/myStyle.css">
   <script>
   // yyyy-mm-dd cho input date
   function toYYYYMMDD(date) {
@@ -237,6 +236,9 @@
             <div class="thumbs row row-cols-5 g-2 mt-1">
               <div class="col"><img onclick="document.getElementById('heroImg').src='../img/pic3BD.jpg'" src="../img/pic3BD.jpg" class="w-100 rounded" alt="thumb1"></div>
               <div class="col"><img onclick="document.getElementById('heroImg').src='../img/thapbanhit.jpg'" src="../img/thapbanhit.jpg" class="w-100 rounded" alt="thumb2"></div>
+              <div class="col"><img onclick="document.getElementById('heroImg').src='../img/champa1.jpg'" src="../img/champa1.jpg" class="w-100 rounded" alt="thumb3"></div>
+              <div class="col"><img onclick="document.getElementById('heroImg').src='../img/champa2.png'" src="../img/champa2.png" class="w-100 rounded" alt="thumb4"></div>
+              <div class="col"><img onclick="document.getElementById('heroImg').src='../img/champa3.png'" src="../img/champa3.png" class="w-100 rounded" alt="thumb5"></div>
             </div>
           </div>
         </div>
@@ -270,7 +272,7 @@
               <span class="input-group-text">Người lớn</span>
               <input type="number" id="nguoiLon" class="form-control" value="1" min="1" oninput="tinhTongTien()">
               <span class="input-group-text">Trẻ em</span>
-              <input type="number" id="nguoiLon" class="form-control" value="1" min="1" oninput="tinhTongTien()">
+              <input type="number" id="treEm" class="form-control" value="0" min="0" oninput="tinhTongTien()">
             </div>
           </div>
           <div class="mt-2 small">Nơi khởi hành: Quy Nhơn</div>
@@ -445,5 +447,6 @@
   </footer>
   <script src="../js/jquery-4.0.0.js"></script>
   <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="../js/son.js"></script>
 </body>
 </html>
