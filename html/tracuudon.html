@@ -173,8 +173,12 @@
             <p class="fw-bold fs-5 text-primary" id="detailOrderId">---</p>
           </div>
           <div class="mb-3 pb-2 border-bottom">
-            <small class="text-muted">Tên tour</small>
-            <p class="fw-semibold" id="detailTourName">---</p>
+            <small class="text-muted">Tên khách hàng</small>
+            <p id="detailName">---</p>
+          </div>
+          <div class="mb-3 pb-2 border-bottom">
+            <small class="text-muted">Số điện thoại</small>
+            <p id="detailPhone">---</p>
           </div>
           <div class="mb-3 pb-2 border-bottom">
             <small class="text-muted">Số lượng khách</small>
@@ -340,60 +344,66 @@
   <script src="../js/jquery-4.0.0.js"></script>
   <script src="../js/bootstrap.bundle.min.js"></script>
   <script>
-    // Hàm hiển thị modal chi tiết đơn hàng
+    // Hiển thị chi tiết đơn hàng
     function showOrderDetail(order) {
       if (!order) return;
-      document.getElementById('detailOrderId').innerText = order.id || '---';
-      document.getElementById('detailTourName').innerText = order.name || 'Không rõ';
-      document.getElementById('detailQuantity').innerText = order.quantity || '1';
-      const statusSpan = document.getElementById('detailStatus');
-      const statusText = order.status || 'Chưa thanh toán';
-      statusSpan.innerText = statusText;
-      statusSpan.className = `badge ${statusText === 'Đã thanh toán' ? 'bg-success' : 'bg-warning text-dark'}`;
-      document.getElementById('detailEmail').innerText = order.email || 'Chưa cập nhật';
-      document.getElementById('detailTime').innerText = order.time || 'Không rõ';
 
-      // Hiển thị modal (dùng Bootstrap JS)
-      const modalEl = document.getElementById('orderDetailModal');
-      const modal = new bootstrap.Modal(modalEl);
-      modal.show();
+      document.getElementById('detailOrderId').innerText = order.maTour || '---';
+      document.getElementById('detailQuantity').innerText = order.soLuong || '1';
+
+      document.getElementById('detailName').innerText = order.hoTen || '---';
+      document.getElementById('detailPhone').innerText = order.sdt || '---';
+
+      const statusSpan = document.getElementById('detailStatus');
+      const statusText = order.trangThai || 'Chưa thanh toán';
+      statusSpan.innerText = statusText;
+      statusSpan.className =
+        `badge ${statusText === 'Đã thanh toán' ? 'bg-success' : 'bg-warning text-dark'}`;
+
+      document.getElementById('detailEmail').innerText = order.email || '---';
+      document.getElementById('detailTime').innerText = order.gioDat || '---';
+
+      new bootstrap.Modal(document.getElementById('orderDetailModal')).show();
     }
 
-    // Tra cứu theo mã đơn hàng
+    // ===== TRA CỨU THEO MÃ =====
     function searchOrderById() {
-      const orderId = document.getElementById('orderIdInput').value.trim();
+      let orderId = document.getElementById('orderIdInput').value.trim();
+
       if (!orderId) {
-        alert('Vui lòng nhập mã đơn hàng!');
+        alert('Vui lòng nhập mã đơn!');
         return;
       }
 
-      const orders = JSON.parse(localStorage.getItem('orders')) || [];
-      const foundOrder = orders.find(order => order.id === orderId);
+      // LẤY ĐÚNG DATA TỪ OWNER
+      let ds = JSON.parse(localStorage.getItem('danhSachDon')) || [];
 
-      if (foundOrder) {
-        showOrderDetail(foundOrder);
+      let found = ds.find(x => x.maTour === orderId);
+
+      if (found) {
+        showOrderDetail(found);
       } else {
-        alert('Không tìm thấy đơn hàng với mã: ' + orderId + '\nVui lòng kiểm tra lại.');
+        alert('Không tìm thấy đơn hàng!');
       }
     }
 
-    // Tra cứu theo số điện thoại (cần có trường phone trong đơn hàng)
+    // ===== TRA CỨU THEO SĐT =====
     function searchOrderByPhone() {
-      const phone = document.getElementById('phoneInput').value.trim();
+      let phone = document.getElementById('phoneInput').value.trim();
+
       if (!phone) {
         alert('Vui lòng nhập số điện thoại!');
         return;
       }
 
-      const orders = JSON.parse(localStorage.getItem('orders')) || [];
-      // Tìm đơn hàng có số điện thoại khớp (nếu lưu trường phone)
-      const foundOrder = orders.find(order => order.phone === phone);
+      let ds = JSON.parse(localStorage.getItem('danhSachDon')) || [];
 
-      if (foundOrder) {
-        showOrderDetail(foundOrder);
+      let found = ds.find(x => x.sdt === phone);
+
+      if (found) {
+        showOrderDetail(found);
       } else {
-        // Nếu chưa có dữ liệu phone, thông báo hướng dẫn dùng mã đơn
-        alert('Hiện tại chưa hỗ trợ tra cứu theo số điện thoại. Vui lòng tra cứu bằng mã đơn hàng.\n\nNếu bạn đã đặt tour, mã đơn có dạng QN-xxxxxxx, BD-xxxxxxx,... và được gửi qua email khi thanh toán.');
+        alert('Không tìm thấy đơn hàng!');
       }
     }
   </script>
