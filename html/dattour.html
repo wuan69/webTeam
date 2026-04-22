@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DatTour</title>
+  <title>Đặt Tour - Nắng Central Tour</title>
 
   <!-- css -->
   <link rel="stylesheet" href="../css/bootstrap.css">
@@ -482,11 +482,6 @@
       };
 
       localStorage.setItem("donTam", JSON.stringify(donTam));
-    }
-    function taoMaDon() {
-      let timePart = Date.now().toString().slice(-6);
-      let randomPart = Math.floor(100 + Math.random() * 900);
-      return "TOUR-" + timePart + randomPart;
     }
   </script>
 </body>

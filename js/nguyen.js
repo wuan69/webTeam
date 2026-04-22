@@ -71,11 +71,58 @@ function kiemTra() {
     document.getElementById("btnThanhToan").disabled = !ok;
 }
 
-// ===================== TẠO MÃ =====================
+// ===================== TẠO MÃ THEO VÙNG =====================
 function taoMaDon() {
-    let time = Date.now().toString().slice(-6);
-    let rand = Math.floor(100 + Math.random() * 900);
-    return "TOUR-" + time + rand;
+    // Lấy tên tour đã chọn từ localStorage
+    let tenTour = localStorage.getItem("tenTour") || "";
+    let upperTen = tenTour.toUpperCase();
+    let prefix = "TOUR"; // mặc định
+
+    // Kiểm tra vùng Quảng Ngãi
+    if (upperTen.includes("QUẢNG NGÃI") ||
+        upperTen.includes("LÝ SƠN") ||
+        upperTen.includes("SA HUỲNH") ||
+        upperTen.includes("SƠN THỦY HỮU TÌNH") ||
+        upperTen.includes("HAWAII VIỆT NAM") ||
+        upperTen.includes("VĂN HÓA SA HUỲNH")) {
+        prefix = "QN";
+    }
+    // Kiểm tra vùng Bình Định
+    else if (upperTen.includes("BÌNH ĐỊNH") ||
+             upperTen.includes("QUY NHƠN") ||
+             upperTen.includes("KỲ CO") ||
+             upperTen.includes("EO GIÓ") ||
+             upperTen.includes("CÙ LAO XANH") ||
+             upperTen.includes("ĐẤT VÕ") ||
+             upperTen.includes("THÁP BÁNH ÍT") ||
+             upperTen.includes("TÂY SƠN")) {
+        prefix = "BD";
+    }
+    // Kiểm tra vùng Thừa Thiên Huế
+    else if (upperTen.includes("THỪA THIÊN HUẾ") ||
+             upperTen.includes("HUẾ") ||
+             upperTen.includes("ĐẠI NỘI") ||
+             upperTen.includes("LĂNG KHẢI ĐỊNH") ||
+             upperTen.includes("PHÁ TAM GIANG") ||
+             upperTen.includes("LĂNG CÔ") ||
+             upperTen.includes("PHONG NHA") ||
+             upperTen.includes("DI SẢN")) {
+        prefix = "HUE";
+    }
+    // Kiểm tra vùng Lâm Đồng
+    else if (upperTen.includes("LÂM ĐỒNG") ||
+             upperTen.includes("ĐÀ LẠT") ||
+             upperTen.includes("BẢO LỘC") ||
+             upperTen.includes("LANGBIANG") ||
+             upperTen.includes("THÀNH PHỐ SƯƠNG MÙ") ||
+             upperTen.includes("HƯƠNG TRÀ") ||
+             upperTen.includes("TREKKING")) {
+        prefix = "LD";
+    }
+
+    // Tạo 5 số ngẫu nhiên (10000 -> 99999)
+    let randomNum = Math.floor(10000 + Math.random() * 90000);
+    return prefix + "-" + randomNum;
 }
 
 // ===================== MAIN =====================
