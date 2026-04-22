@@ -71,9 +71,11 @@ function ktrTen(){
   //   }
     // theo thg nhàng
   function load() {
-    let danhSach = JSON.parse(localStorage.getItem("dsDonHang") || "[]");
     let tb = document.getElementById("tb2");
-    
+    if (!tb) return; // THÊM DÒNG NÀY
+
+    let danhSach = JSON.parse(localStorage.getItem("dsDonHang") || "[]");
+
     for (let i = 0; i < danhSach.length; i++) {
         let item = danhSach[i]; 
         let row = tb.insertRow(-1);

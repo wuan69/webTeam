@@ -312,7 +312,7 @@
                                     <strong id="orderId">BPT26030801</strong>
                                 </div>
                             </div>
-                            <button class="btn-copy">
+                            <button class="btn-copy" onclick="copyText(this)">
                                 <i class="bi bi-copy me-1"></i> Copy
                             </button>
                         </div>
@@ -335,7 +335,7 @@
                                     <strong id="amount">700.000đ</strong>
                                 </div>
                             </div>
-                            <button class="btn-copy">
+                            <button class="btn-copy" onclick="copyText(this)">
                                 <i class="bi bi-copy me-1"></i> Copy
                             </button>
                         </div>
@@ -388,7 +388,7 @@
                                         <small>Số tài khoản</small><br>
                                         <strong id="stk" class="text-warning">100306578</strong>
                                     </div>
-                                    <button class="btn-copy">
+                                    <button class="btn-copy" onclick="copyText(this)">
                                         <i class="bi bi-copy me-1"></i> Copy
                                     </button>
                                 </div>
@@ -398,7 +398,7 @@
                                         <small>Tên tài khoản</small><br>
                                         <strong id="bankName" class="text-warning">NANG CENTRAL TOUR</strong>
                                     </div>
-                                    <button class="btn-copy">
+                                    <button class="btn-copy" onclick="copyText(this)">
                                         <i class="bi bi-copy me-1"></i> Copy
                                     </button>
                                 </div>
@@ -406,9 +406,9 @@
                                 <div class="info-item mt-2 d-flex justify-content-between align-items-center">
                                     <div>
                                         <small>Nội dung CK</small><br>
-                                        <strong id="content" class="text-warning">0772051048 BPT26030801</strong>
+                                        <strong id="content" class="text-warning"></strong>
                                     </div>
-                                    <button class="btn-copy">
+                                    <button class="btn-copy" onclick="copyText(this)">
                                         <i class="bi bi-copy me-1"></i> Copy
                                     </button>
                                 </div>
@@ -428,14 +428,15 @@
                     <strong>Xác nhận đã thanh toán</strong>
                 </div>
                 <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" id="confirm">
-                    <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" id="confirm" onchange="doiMauNut()">
+                    <label class="form-check-label" for="confirm">
                         Tôi đã thanh toán đúng thông tin
                     </label>
                 </div>
-                <button id="btnConfirm" class="btn btn-secondary btn-confirm w-100">
+                <button id="btnConfirm" onclick="xacNhanThanhToan()" disabled
+                    class="btn btn-secondary btn-confirm w-100">
                     <i class="bi bi-check-circle me-2"></i>
-                    Tôi đã thanh toán • 700.000 đ
+                    Tôi đã thanh toán •
                 </button>
                 <small class="text-muted mt-2"> Sau khi bấm xác nhận, hệ thống sẽ kiểm tra và cập nhật trạng thái đơn
                     trong ít phút. </small>
@@ -457,47 +458,45 @@
         }
 
         // nút copy
-        const copyButtons = document.querySelectorAll(".btn-copy");
+        function copyText(btn) {
 
-        copyButtons.forEach(btn => {
-            btn.addEventListener("click", function () {
+            let textCopy =
+                btn.parentElement.querySelector("strong").innerText;
 
-                let textCopy = this.parentElement.querySelector("strong").innerText;
+            navigator.clipboard.writeText(textCopy);
 
-                navigator.clipboard.writeText(textCopy);
+            let oldHtml = btn.innerHTML;
 
-                let oldHtml = this.innerHTML;
+            btn.innerHTML =
+                '<i class="bi bi-check-lg me-1"></i>Đã copy';
 
-                this.innerHTML = '<i class="bi bi-check-lg me-1"></i>Đã copy';
-                this.classList.remove("btn-outline-primary");
-                this.classList.add("btn-success");
+            btn.classList.add("btn-success");
 
-                setTimeout(() => {
-                    this.innerHTML = oldHtml;
-                    this.classList.remove("btn-success");
-                }, 1500);
+            setTimeout(function () {
+                btn.innerHTML = oldHtml;
+                btn.classList.remove("btn-success");
+            }, 1500);
 
-            });
-        });
+        }
 
 
         // ===== CHECKBOX XÁC NHẬN THANH TOÁN =====
-        const checkbox = document.getElementById("confirm");
-        const btnConfirm = document.getElementById("btnConfirm");
+        function doiMauNut() {
+            let ck = document.getElementById("confirm");
+            let btn = document.getElementById("btnConfirm");
 
-        checkbox.addEventListener("change", function () {
+            if (!btn) return;
 
-            if (this.checked) {
-                btnConfirm.classList.remove("btn-secondary");
-                btnConfirm.classList.add("btn-success");
-                btnConfirm.disabled = false;
+            if (ck.checked) {
+                btn.disabled = false;
+                btn.classList.remove("btn-secondary");
+                btn.classList.add("btn-success");
+            } else {
+                btn.disabled = true;
+                btn.classList.remove("btn-success");
+                btn.classList.add("btn-secondary");
             }
-            else {
-                btnConfirm.classList.remove("btn-success");
-                btnConfirm.classList.add("btn-secondary");
-            }
-        })
-        
+        }
         //Tạo mã đơn TOUR-XXXXXX
         function taoMaDon() {
 
@@ -511,18 +510,36 @@
         }
 
         window.onload = function () {
-
-            let maDon = taoMaDon();
-
-            // hiện mã đơn
-            document.getElementById("orderId").innerHTML = maDon;
-
-            // lưu lại
-            localStorage.setItem("maDonTour", maDon);
-
-            // đổ luôn vào nội dung chuyển khoản
-            document.getElementById("content").innerHTML = maDon;
+            let don = JSON.parse(localStorage.getItem("donTam"));
+            if (don) {
+                document.getElementById("orderId").innerHTML = don.maTour;
+                document.getElementById("content").innerHTML = don.maTour;
+            }
+            doiMauNut();
         }
+        function xacNhanThanhToan() {
+            let ck = document.getElementById("confirm");
+
+            if (!ck.checked) {
+                alert("Vui lòng xác nhận");
+                return;
+            }
+
+            let don = JSON.parse(localStorage.getItem("donTam"));
+            let ds = JSON.parse(localStorage.getItem("danhSachDon")) || [];
+
+            for (let i = 0; i < ds.length; i++) {
+                if (ds[i].maTour === don.maTour) {
+                    ds[i].trangThai = "Đã thanh toán";
+                    ds[i].gioDat = new Date().toLocaleString();
+                }
+            }
+
+            localStorage.setItem("danhSachDon", JSON.stringify(ds));
+
+            alert("Thanh toán thành công!");
+        }
+
     </script>
 </body>
 
