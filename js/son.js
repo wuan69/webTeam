@@ -39,3 +39,68 @@
   document.addEventListener("DOMContentLoaded", () => {
     tinhTongTien();
   });
+  ///////////////////////////////////////////////////////////////////////
+  // Hàm kiểm tra ngày đi
+  function validateNgayDi() {
+    const inputNgay = document.getElementById("ngayDi");
+    const baoLoi = document.getElementById("bao");
+    
+    // 1. Kiểm tra nếu để trống
+    if (!inputNgay.value) {
+      baoLoi.textContent = "Vui lòng chọn ngày khởi hành!";
+      return false;
+    }
+
+    // 2. Chuyển đổi định dạng ngày để so sánh
+    const ngayChon = new Date(inputNgay.value);
+    const homNay = new Date();
+    homNay.setHours(0, 0, 0, 0); // Xóa giờ/phút/giây để so sánh ngày cho chuẩn
+
+    // 3. Quy định số ngày đặt trước (Ví dụ: 10 ngày)
+    const soNgayDatTruoc = 10; 
+    const ngayToiThieu = new Date(homNay);
+    ngayToiThieu.setDate(ngayToiThieu.getDate() + soNgayDatTruoc);
+
+    // 4. Kiểm tra điều kiện
+    if (ngayChon < ngayToiThieu) {
+      baoLoi.textContent = `Lỗi: Vui lòng đặt tour trước ít nhất ${soNgayDatTruoc} ngày!`;
+      return false; 
+    }
+
+    // Nếu mọi thứ hợp lệ -> Xóa dòng báo lỗi
+    baoLoi.textContent = "";
+    return true; 
+  }
+
+  // Hàm xử lý khi bấm nút "ĐẶT TOUR NGAY"
+  function luuDuLieu(event) {
+    // Ngăn chặn thẻ <a> tự động chuyển trang
+    if (event) event.preventDefault();
+
+    // Gọi hàm kiểm tra, nếu false (bị lỗi) thì dừng lại ngay
+    if (!validateNgayDi()) {
+      alert("Vui lòng chọn ngày khởi hành hợp lệ trước khi đặt tour!");
+      document.getElementById("ngayDi").focus(); 
+      return; 
+    }
+
+    // --- LẤY DỮ LIỆU TỪ GIAO DIỆN ---
+    const ngayKhoiHanh = document.getElementById("ngayDi").value;
+    const soNguoiLon = document.getElementById("nguoiLon").value;
+    const soTreEm = document.getElementById("treEm").value;
+    const tongTien = document.getElementById("tongTienDisplay").innerText;
+    
+    // Giả sử tên tour nằm trong thẻ <h1>
+    const theTieuDe = document.querySelector("h1");
+    const tenTour = theTieuDe ? theTieuDe.innerText : "TOUR DU LỊCH";
+
+    localStorage.setItem("nguoiLon", soNguoiLon); 
+    localStorage.setItem("treEm", soTreEm); 
+    localStorage.setItem("tenTour", tenTour); 
+    localStorage.setItem("ngayDi", ngayKhoiHanh); // Lưu thêm dự phòng
+
+    localStorage.setItem("tongTienTour", tongTien);
+
+    // Sau khi lưu xong thì chuyển sang trang đặt tour
+    window.location.href = "dattour.html";
+  }
