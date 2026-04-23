@@ -34,7 +34,8 @@
         }
 
         .qr-box img {
-            width: 280px;
+            width: 100%;
+            max-width: 260px;
             background: #fff;
             padding: 10px;
             border-radius: 10px;
@@ -51,6 +52,10 @@
 
             .bank-card {
                 border-radius: 0 16px 16px 0;
+            }
+
+            main {
+                margin-top: 140px;
             }
         }
 
@@ -99,7 +104,11 @@
         }
 
         main {
-            margin-top: 140px;
+            margin-top: 160px;
+        }
+
+        .btn-confirm:disabled {
+            opacity: 0.6;
         }
     </style>
 </head>
@@ -257,7 +266,7 @@
         <div class="container my-4">
             <!-- STEP -->
             <div class="row">
-                <div class="col-4 mb-2">
+                <div class="col-12 col-md-4 mb-2">
                     <div class="card ps-3 py-2 card-custom">
                         <div class="d-flex">
                             <i class="bi bi-qr-code-scan fs-1 text-primary"></i>
@@ -269,7 +278,7 @@
                     </div>
                 </div>
 
-                <div class="col-4 mb-2">
+                <div class="col-12 col-md-4 mb-2">
                     <div class="card ps-3 py-2 card-custom">
                         <div class="d-flex">
                             <i class="bi bi-file-earmark-text fs-1 text-primary"></i>
@@ -281,7 +290,7 @@
                     </div>
                 </div>
 
-                <div class="col-4 mb-2">
+                <div class="col-12 col-md-4 mb-2">
                     <div class="card ps-3 py-2 card-custom">
                         <div class="d-flex">
                             <i class="bi bi-check-circle fs-1 text-success"></i>
@@ -297,7 +306,7 @@
             <!-- MAIN -->
             <div class="row g-3">
                 <!-- LEFT -->
-                <div class="col-lg-4">
+                <div class="col-12 col-lg-4 mb-3">
                     <div class="card card-custom p-3">
                         <h5>
                             <i class="bi bi-info-circle text-warning me-1"></i>
