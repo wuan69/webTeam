@@ -74,10 +74,8 @@
 
   // Hàm xử lý khi bấm nút "ĐẶT TOUR NGAY"
   function luuDuLieu(event) {
-    // Ngăn chặn thẻ <a> tự động chuyển trang
     if (event) event.preventDefault();
 
-    // Gọi hàm kiểm tra, nếu false (bị lỗi) thì dừng lại ngay
     if (!validateNgayDi()) {
       alert("Vui lòng chọn ngày khởi hành hợp lệ trước khi đặt tour!");
       document.getElementById("ngayDi").focus(); 
@@ -90,17 +88,30 @@
     const soTreEm = document.getElementById("treEm").value;
     const tongTien = document.getElementById("tongTienDisplay").innerText;
     
-    // Giả sử tên tour nằm trong thẻ <h1>
-    const theTieuDe = document.querySelector("h1");
-    const tenTour = theTieuDe ? theTieuDe.innerText : "TOUR DU LỊCH";
+    // --- TÌM MÃ VÙNG (Đảm bảo chính xác 100%) ---
+    // Quét nội dung thẻ h1, thẻ title và thanh breadcrumb để tìm từ khóa
+    const theTieuDe = document.querySelector("h1") ? document.querySelector("h1").innerText : document.title;
+    const breadcrumb = document.querySelector(".breadcrumb") ? document.querySelector(".breadcrumb").innerText : "";
+    const textDeTim = (theTieuDe + " " + breadcrumb).toUpperCase();
 
+    let prefix = "TOUR";
+    if (textDeTim.includes("QUẢNG NGÃI") || textDeTim.includes("LÝ SƠN") || textDeTim.includes("SA HUỲNH")) {
+        prefix = "QN";
+    } else if (textDeTim.includes("BÌNH ĐỊNH") || textDeTim.includes("QUY NHƠN") || textDeTim.includes("KỲ CO") || textDeTim.includes("CÙ LAO XANH") || textDeTim.includes("THÁP BÁNH ÍT")) {
+        prefix = "BD";
+    } else if (textDeTim.includes("HUẾ") || textDeTim.includes("PHONG NHA") || textDeTim.includes("TAM GIANG")) {
+        prefix = "HUE";
+    } else if (textDeTim.includes("LÂM ĐỒNG") || textDeTim.includes("ĐÀ LẠT") || textDeTim.includes("BẢO LỘC") || textDeTim.includes("LANGBIANG")) {
+        prefix = "LD";
+    }
+
+    // --- LƯU ĐỒNG BỘ DATA ---
     localStorage.setItem("nguoiLon", soNguoiLon); 
     localStorage.setItem("treEm", soTreEm); 
-    localStorage.setItem("tenTour", tenTour); 
-    localStorage.setItem("ngayDi", ngayKhoiHanh); // Lưu thêm dự phòng
-
+    localStorage.setItem("tenTour", theTieuDe); 
+    localStorage.setItem("ngayDi", ngayKhoiHanh);
+    localStorage.setItem("maVung", prefix); // CHỐT MÃ VÙNG CHUẨN ĐỂ ĐẨY QUA TRANG SAU
     localStorage.setItem("tongTienTour", tongTien);
 
-    // Sau khi lưu xong thì chuyển sang trang đặt tour
     window.location.href = "dattour.html";
   }
