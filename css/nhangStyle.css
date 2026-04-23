@@ -36,9 +36,11 @@ body {
   .bank-card {
     border-radius: 0 16px 16px 0;
   }
+}
 
-  main {
-    margin-top: 140px;
+@media (max-width: 767px) {
+  .card-custom {
+    margin-bottom: 8px;
   }
 }
 
@@ -77,8 +79,7 @@ body {
     box-shadow 0.2s;
 }
 
-.card-custom:hover,
-.qr-box:hover {
+.card-custom:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
@@ -86,10 +87,6 @@ body {
 .alert-warning {
   background-color: #fff3cd;
   border-left: 4px solid #ffc107;
-}
-
-main {
-  margin-top: 160px;
 }
 
 .btn-confirm:disabled {
