@@ -7,6 +7,7 @@
   <title>Tra cứu đơn hàng - Nắng Central Tour</title>
   <!-- icon -->
   <link rel="icon" href="../img/icon-link.png" type="image/png">
+  <script src="../js/quang.js"></script>
   <!-- css -->
   <link rel="stylesheet" href="../css/bootstrap.css">
   <link rel="stylesheet" href="../css/myStyle.css">
@@ -114,19 +115,21 @@
                 <option value="Bình Định">Bình Định</option>
                 <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
                 <option value="Lâm Đồng">Lâm Đồng</option>
-                <option value="None">Chưa biết</option>
+                <option value="None">Chưa biết cần tư vấn</option>
               </select>
             </div>
             <div class="row mb-4">
               <div class="col-md-6">
                 <label for="name" class="form-label fs-5 fw-medium">Họ và tên:</label>
-                <input type="text" id="name" name="name" placeholder="(bắt buộc)"
+                <input onblur="ktrTen();" type="text" id="name" name="name" placeholder="Nguyen Van A"
                   class="form-control form-control-lg bg-light border-0 rounded-3 fs-5">
+                <span id="er1"></span>
               </div>
               <div class="col-md-6 mt-3 mt-md-0">
                 <label for="phone" class="form-label fs-5 fw-medium">Số điện thoại:</label>
-                <input type="number" id="phone" name="phone" placeholder="(bắt buộc)"
+                <input onblur="chkPhone();" type="tel" id="phone" name="phone" placeholder="071-2345678"
                   class="form-control form-control-lg bg-light border-0 rounded-3 fs-5">
+                <span id="er2"></span>
               </div>
             </div>
             <div class="row mb-4">
@@ -149,8 +152,8 @@
           </form>
         </div>
         <div class="modal-footer border-top-0 justify-content-center pb-4">
-          <button type="button" class="btn btn-primary btn-lg rounded-pill fs-5 px-5 shadow" data-bs-dismiss="modal">Gửi
-            yêu cầu</button>
+          <button type="button" class="btn btn-primary btn-lg rounded-pill fs-5 px-5 shadow" data-bs-dismiss="modal"
+            onclick="yeuCau();">Gửi yêu cầu</button>
         </div>
       </div>
     </div>

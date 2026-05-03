@@ -48,47 +48,46 @@ function ktrTen(){
       alert("Đã gửi yêu cầu!");
   }
   //load dữ liệu 
-  // function load(){
-  //     let ktr =localStorage.getItem("isOwner");
-  //     if(ktr==="true"){
-  //       let danhSach = JSON.parse(localStorage.getItem("dsDonHang") || "[]");
-  //       let tb = document.getElementById("tb2");
-  //       for (let i = 0; i < danhSach.length; i++) {
-  //           let item = danhSach[i]; 
-  //           let row = tb.insertRow(-1);
-  //           row.insertCell(0).innerHTML = i + 1;   
-  //           row.insertCell(1).innerHTML = item.name;    
-  //           row.insertCell(2).innerHTML = item.dd;       
-  //           row.insertCell(3).innerHTML = item.phone;   
-  //           row.insertCell(4).innerHTML = item.num;     
-  //           row.insertCell(5).innerHTML = item.date;    
-  //           row.insertCell(6).innerHTML = item.note;    
-  //       }
-  //     }else{
-  //       window.location.href="./canhbao.html";  
-  //       // logout();
-  //     }
-  //   }
-    // theo thg nhàng
-  function load() {
-    let tb = document.getElementById("tb2");
-    if (!tb) return; // THÊM DÒNG NÀY
-
-    let danhSach = JSON.parse(localStorage.getItem("dsDonHang") || "[]");
-
-    for (let i = 0; i < danhSach.length; i++) {
-        let item = danhSach[i]; 
-        let row = tb.insertRow(-1);
-        row.insertCell(0).innerHTML = i + 1;   
-        row.insertCell(1).innerHTML = item.name;    
-        row.insertCell(2).innerHTML = item.dd;       
-        row.insertCell(3).innerHTML = item.phone;   
-        row.insertCell(4).innerHTML = item.num;     
-        row.insertCell(5).innerHTML = item.date;    
-        row.insertCell(6).innerHTML = item.note;    
+  function load(){
+      let ktr =localStorage.getItem("isOwner");
+      if(ktr==="true"){
+        let danhSach = JSON.parse(localStorage.getItem("dsDonHang") || "[]");
+        let tb = document.getElementById("tb2");
+        for (let i = 0; i < danhSach.length; i++) {
+            let item = danhSach[i]; 
+            let row = tb.insertRow(-1);
+            row.insertCell(0).innerHTML = i + 1;   
+            row.insertCell(1).innerHTML = item.name;    
+            row.insertCell(2).innerHTML = item.dd;       
+            row.insertCell(3).innerHTML = item.phone;   
+            row.insertCell(4).innerHTML = item.num;     
+            row.insertCell(5).innerHTML = item.date;    
+            row.insertCell(6).innerHTML = item.note;    
+        }
+      }else{
+        window.location.href="./canhbao.html";  
+        // logout();
+      }
     }
-}
-    // sắp xếp tour theo từng group
+    // test
+//   function load() {
+//     let tb = document.getElementById("tb2");
+//     if (!tb) return; // THÊM DÒNG NÀY
+
+//     let danhSach = JSON.parse(localStorage.getItem("dsDonHang") || "[]");
+
+//     for (let i = 0; i < danhSach.length; i++) {
+//         let item = danhSach[i]; 
+//         let row = tb.insertRow(-1);
+//         row.insertCell(0).innerHTML = i + 1;   
+//         row.insertCell(1).innerHTML = item.name;    
+//         row.insertCell(2).innerHTML = item.dd;       
+//         row.insertCell(3).innerHTML = item.phone;   
+//         row.insertCell(4).innerHTML = item.num;     
+//         row.insertCell(5).innerHTML = item.date;    
+//         row.insertCell(6).innerHTML = item.note;    
+//     }
+// }
     function sortTours(order) {
       const containers = document.querySelectorAll('.tour-group');
       containers.forEach(container => {
