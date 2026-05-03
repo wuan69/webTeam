@@ -88,6 +88,8 @@ function ktrTen(){
 //         row.insertCell(6).innerHTML = item.note;    
 //     }
 // }
+
+    //sắp xếp các tour dựa trên giá tiền
     function sortTours(order) {
       const containers = document.querySelectorAll('.tour-group');
       containers.forEach(container => {
